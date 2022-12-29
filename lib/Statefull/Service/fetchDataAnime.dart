@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:myanimeapp/Service/anime.dart';
+import '../Models/anime.dart';
 
 class FetchDataAnime {
   static Future<List<Anime>> fetchAnime() async {

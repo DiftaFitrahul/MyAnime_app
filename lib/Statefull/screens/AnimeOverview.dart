@@ -1,42 +1,26 @@
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import '../Models/fetchDataAnime.dart';
-import '../Service/anime.dart';
+import 'package:myanimeapp/Statefull/Widgets/bodyModels.dart';
 
-class AnimeList extends StatefulWidget {
-  const AnimeList({Key key}) : super(key: key);
+import '../Service/fetchDataAnime.dart';
+import '../Models/anime.dart';
+
+class AnimeOverview extends StatefulWidget {
+  const AnimeOverview({Key key}) : super(key: key);
 
   @override
-  State<AnimeList> createState() => _AnimeListState();
+  State<AnimeOverview> createState() => _AnimeOverviewState();
 }
 
-class _AnimeListState extends State<AnimeList> {
+class _AnimeOverviewState extends State<AnimeOverview> {
   Future<List<Anime>> futureAnime;
 
   @override
   void initState() {
     super.initState();
     futureAnime = FetchDataAnime.fetchAnime();
-  }
-
-  Column dataAnimes(List<Anime> datas, int index) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 230,
-          width: 170,
-          child: Image(
-              fit: BoxFit.cover, image: NetworkImage(datas[index].animeImg)),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          datas[index].animeTitle,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-        )
-      ],
-    );
   }
 
   @override
@@ -56,7 +40,7 @@ class _AnimeListState extends State<AnimeList> {
                     mainAxisExtent: 300),
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, index) {
-                  return dataAnimes(snapshot.data, index);
+                  return AnimeWidget(snapshot.data, index);
                 },
               );
             } else if (snapshot.hasError) {

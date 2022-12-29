@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Models/fetchDataAnime.dart';
-import 'package:myanimeapp/Service/anime.dart';
+import '../Models/fetchDataAnime.dart';
+import '../Service/anime.dart';
 
 class AnimeList extends StatefulWidget {
   const AnimeList({Key key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Models/bodyModels.dart';
+import './Statefull/Models/bodyModels.dart';
 
 void main() {
   runApp(const MyApp());

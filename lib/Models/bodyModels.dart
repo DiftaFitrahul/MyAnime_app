@@ -42,32 +42,39 @@ class _AnimeListState extends State<AnimeList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("List of Popular Anime")),
-        body: Stack(
-          children: [
-            FutureBuilder<List<Anime>>(
-              future: futureAnime,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            mainAxisExtent: 300),
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      return dataAnimes(snapshot.data, index);
-                    },
-                  );
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-                return const CircularProgressIndicator();
-              },
-            ),
-          ],
-        ));
+      appBar: AppBar(title: Text("List of Popular Anime")),
+      body: GestureDetector(
+        child: FutureBuilder<List<Anime>>(
+          future: futureAnime,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    mainAxisExtent: 300),
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, index) {
+                  return dataAnimes(snapshot.data, index);
+                },
+              );
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+            return SizedBox(
+              height: MediaQuery.of(context).size.height / 0.8,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {},
+      ),
+    );
   }
 }

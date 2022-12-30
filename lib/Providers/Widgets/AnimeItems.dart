@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Statefull/screens/AnimeDetail.dart';
-import '../Service/fetchDataAnime.dart';
+import '../screens/AnimeDetail.dart';
 import '../Models/anime.dart';
 
 class AnimeWidget extends StatelessWidget {
@@ -30,7 +29,7 @@ class AnimeWidget extends StatelessWidget {
         child: GestureDetector(
           onTap: (() {
             Navigator.of(context).pushNamed(AnimeDetailScreen.routeName,
-                arguments: index.toString());
+                arguments: datas[index].animeId);
           }),
           child: Image.network(
             datas[index].animeImg,

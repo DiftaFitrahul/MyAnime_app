@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import './Statefull/screens/AnimeOverview.dart';
-import './Statefull/screens/AnimeDetail.dart';
+import 'package:myanimeapp/Statefull/Models/anime.dart';
+import 'package:provider/provider.dart';
+import 'Providers/AnimesProvider.dart';
+import 'Providers/screens/AnimeDetail.dart';
+import 'Providers/screens/AnimeOverview.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,15 +14,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'List of Popular Anime',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.indigo)
-            .copyWith(secondary: Colors.amber),
+    return ChangeNotifierProvider(
+      create: (context) => AnimesProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'List of Popular Anime',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.indigo)
+              .copyWith(secondary: Colors.amber),
+        ),
+        home: const AnimeOverview(),
+        routes: {AnimeDetailScreen.routeName: (context) => AnimeDetailScreen()},
       ),
-      home: AnimeOverview(),
-      routes: {AnimeDetailScreen.routeName: (context) => AnimeDetailScreen()},
     );
   }
 }

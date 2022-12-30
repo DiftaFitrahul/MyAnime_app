@@ -17,6 +17,8 @@ class AnimeOverview extends StatefulWidget {
 class _AnimeOverviewState extends State<AnimeOverview> {
   Future<List<Anime>> futureAnime;
 
+  //this method to initialize the service
+  //initState Method just call once when the application is being built
   @override
   void initState() {
     super.initState();

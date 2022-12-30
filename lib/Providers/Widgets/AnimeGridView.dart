@@ -14,15 +14,15 @@ class AnimeGridView extends StatelessWidget {
     final animesData = Provider.of<AnimesProvider>(context);
     final allAnimes = animesData.dataAnimes;
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          mainAxisExtent: 300),
-      itemCount: allAnimes.length,
-      itemBuilder: (context, index) {
-        return AnimeWidget(allAnimes, index);
-      },
-    );
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            mainAxisExtent: 300),
+        itemCount: allAnimes.length,
+        itemBuilder: (context, index) => ChangeNotifierProvider.value(
+              value: allAnimes[index],
+              child: const AnimeWidget(),
+            ));
   }
 }

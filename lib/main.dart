@@ -30,3 +30,14 @@ class MyApp extends StatelessWidget {
   }
 }
 //https://gogoanime.consumet.org/popular
+/*
+note:
+learn spread Collection
+learn fetch api using provider
+learn state management provider
+
+learn initState function is a function to inite some method or variable inside this function 
+and it is called only once when the app is built
+
+
+*/

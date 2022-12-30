@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/AnimesProvider.dart';
+import 'package:provider/provider.dart';
 import '../screens/AnimeDetail.dart';
 import '../Models/anime.dart';
 
 class AnimeWidget extends StatelessWidget {
-  final List<Anime> datas;
-  final int index;
-  const AnimeWidget(this.datas, this.index, {Key key}) : super(key: key);
+  const AnimeWidget({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final animeData = Provider.of<Anime>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -19,7 +20,7 @@ class AnimeWidget extends StatelessWidget {
             icon: const Icon(Icons.favorite_border_outlined),
             color: Theme.of(context).colorScheme.secondary,
           ),
-          title: Text(datas[index].animeTitle),
+          title: Text(animeData.animeTitle),
           trailing: IconButton(
             onPressed: (() {}),
             color: Theme.of(context).colorScheme.secondary,
@@ -29,10 +30,10 @@ class AnimeWidget extends StatelessWidget {
         child: GestureDetector(
           onTap: (() {
             Navigator.of(context).pushNamed(AnimeDetailScreen.routeName,
-                arguments: datas[index].animeId);
+                arguments: animeData.animeId);
           }),
           child: Image.network(
-            datas[index].animeImg,
+            animeData.animeImg,
             fit: BoxFit.cover,
           ),
         ),

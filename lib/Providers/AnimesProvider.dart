@@ -13,7 +13,6 @@ class AnimesProvider with ChangeNotifier {
 
   Future<void> getAllAnimes() async {
     isLoading = true;
-    //notifyListeners();
     _dataAnimes = await FetchDataAnime.fetchAnime();
     isLoading = false;
     notifyListeners();

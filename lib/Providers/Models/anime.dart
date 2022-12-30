@@ -1,16 +1,20 @@
-class Anime {
+import 'package:flutter/widgets.dart';
+
+class Anime with ChangeNotifier {
   final String animeId;
   final String animeTitle;
   final String animeImg;
   final String releaseDate;
   final String animeURL;
+  bool isFavorite;
 
-  const Anime(
+  Anime(
       {this.animeId,
       this.animeTitle,
       this.animeImg,
       this.releaseDate,
-      this.animeURL});
+      this.animeURL,
+      this.isFavorite = false});
 
   factory Anime.fromJson(Map<String, dynamic> json) {
     return Anime(

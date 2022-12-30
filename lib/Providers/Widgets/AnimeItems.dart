@@ -16,8 +16,12 @@ class AnimeWidget extends StatelessWidget {
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.favorite_border_outlined),
+            onPressed: () {
+              animeData.favoriteStatus();
+            },
+            icon: (animeData.isFavorite)
+                ? const Icon(Icons.favorite)
+                : const Icon(Icons.favorite_border),
             color: Theme.of(context).colorScheme.secondary,
           ),
           title: Text(animeData.animeTitle),

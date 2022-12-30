@@ -24,4 +24,9 @@ class Anime with ChangeNotifier {
         releaseDate: json['releaseDate'],
         animeURL: json['aniemUrl']);
   }
+
+  void favoriteStatus() {
+    isFavorite = !isFavorite;
+    notifyListeners();
+  }
 }

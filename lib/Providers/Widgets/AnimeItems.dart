@@ -24,7 +24,19 @@ class AnimeWidget extends StatelessWidget {
                 : const Icon(Icons.favorite_border),
             color: Theme.of(context).colorScheme.secondary,
           ),
-          title: Text(animeData.animeTitle),
+          title: TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(AnimeDetailScreen.routeName,
+                  arguments: animeData.animeId);
+            },
+            child: Text(
+              animeData.animeTitle,
+              style: const TextStyle(
+                  fontSize: 12,
+                  overflow: TextOverflow.ellipsis,
+                  color: Colors.white),
+            ),
+          ),
           trailing: IconButton(
             onPressed: (() {}),
             color: Theme.of(context).colorScheme.secondary,

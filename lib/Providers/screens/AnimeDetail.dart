@@ -19,7 +19,7 @@ class AnimeDetailScreen extends StatelessWidget {
       },
     );
     return Scaffold(
-      appBar: AppBar(title: const Text('Anime Detail')),
+      appBar: AppBar(title: Text(anime.animeTitle)),
       body: Center(child: Text('This is an Anime of index ${anime.animeImg}')),
     );
   }

@@ -1,6 +1,7 @@
 # myanimeapp
 
 A new Flutter project.
+Create MyAnime App Using free api and using State Management: Providers
 
 ## Getting Started
 

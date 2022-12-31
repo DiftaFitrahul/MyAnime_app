@@ -30,6 +30,7 @@ class _AnimeOverviewState extends State<AnimeOverview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       appBar: AppBar(
         title: const Text("List of Popular Anime"),
         actions: [

@@ -19,6 +19,7 @@ class AnimeDetailScreen extends StatelessWidget {
       },
     );
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       appBar: AppBar(title: Text(anime.animeTitle)),
       body: Center(child: Text('This is an Anime of index ${anime.animeImg}')),
     );

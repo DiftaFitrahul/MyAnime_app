@@ -60,7 +60,7 @@ class AnimeWidget extends StatelessWidget {
                         animeData.animeImg,
                         animeData.releaseDate);
               }),
-              color: Theme.of(context).colorScheme.secondary,
+              color: Colors.amber,
               icon: (animeData.isBookmark)
                   ? const Icon(Icons.bookmark)
                   : const Icon(Icons.bookmark_border),

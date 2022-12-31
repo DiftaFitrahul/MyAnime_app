@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
-class AnimesBookmark {
+class AnimeBookmark {
   final String title;
   final String imageUrl;
   final String releaseDate;
   bool isDelete;
 
-  AnimesBookmark({this.title, this.imageUrl, this.releaseDate});
+  AnimeBookmark(
+      {@required this.title,
+      @required this.imageUrl,
+      @required this.releaseDate});
 }

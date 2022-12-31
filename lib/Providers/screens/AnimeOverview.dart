@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/AnimesProvider.dart';
+import '../BookmarkProvider.dart';
 import 'package:myanimeapp/Providers/Widgets/AnimeGridView.dart';
 import 'package:myanimeapp/Providers/screens/AnimeBookmark.dart';
 import 'package:provider/provider.dart';
@@ -32,15 +33,16 @@ class _AnimeOverviewState extends State<AnimeOverview> {
       appBar: AppBar(
         title: const Text("List of Popular Anime"),
         actions: [
-          Badge(
-            value: "0",
+          Consumer<BookMarkProvider>(
+            builder: (context, value, icon) =>
+                Badge(value: value.bookmarkLength.toString(), child: icon),
             child: IconButton(
               icon: const Icon(Icons.bookmarks_outlined),
               onPressed: (() {
                 Navigator.of(context).pushNamed(BookmarkScreen.routeName);
               }),
             ),
-          )
+          ),
         ],
       ),
       body: GestureDetector(child: Consumer<AnimesProvider>(

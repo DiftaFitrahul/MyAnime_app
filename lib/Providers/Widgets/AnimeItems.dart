@@ -45,14 +45,20 @@ class AnimeWidget extends StatelessWidget {
           trailing: Consumer<Anime>(
             builder: (context, value, child) => IconButton(
               onPressed: (() {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("succesfully added")));
-                animeBookmark.addBookmark(
-                    animeData.animeId,
-                    animeData.animeTitle,
-                    animeData.animeImg,
-                    animeData.releaseDate);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: (animeData.isBookmark == false)
+                      ? const Text("succesfully added")
+                      : const Text("succesfully removed"),
+                  duration: const Duration(milliseconds: 600),
+                ));
                 animeData.bookmarkStatus();
+                (animeData.isBookmark == false)
+                    ? animeBookmark.removeBookmark(animeData.animeId)
+                    : animeBookmark.addBookmark(
+                        animeData.animeId,
+                        animeData.animeTitle,
+                        animeData.animeImg,
+                        animeData.releaseDate);
               }),
               color: Theme.of(context).colorScheme.secondary,
               icon: (animeData.isBookmark)

@@ -3,26 +3,28 @@ import 'package:myanimeapp/Providers/Models/anime.dart';
 import 'package:myanimeapp/Providers/Models/animeBookmark.dart';
 
 class BookMarkProvider with ChangeNotifier {
-  Map<String, AnimeBookmark> _bookmarks = {};
+  final Map<String, AnimeBookmark> _bookmarks = {};
 
   Map<String, AnimeBookmark> get bookMark => _bookmarks;
 
+  int get bookmarkLength {
+    return _bookmarks.length;
+  }
+
   void addBookmark(String animeID, String animeTitle, String animeImageUrl,
       String animeReleaseDate) {
-    if (_bookmarks.containsKey(animeID)) {
-      _bookmarks.update(
-          animeID,
-          (value) => AnimeBookmark(
-              title: value.title,
-              imageUrl: value.imageUrl,
-              releaseDate: value.releaseDate));
-    } else {
-      _bookmarks.putIfAbsent(
-          animeID,
-          () => AnimeBookmark(
-              title: animeTitle,
-              imageUrl: animeImageUrl,
-              releaseDate: animeReleaseDate));
-    }
+    _bookmarks.putIfAbsent(
+        animeID,
+        () => AnimeBookmark(
+            title: animeTitle,
+            imageUrl: animeImageUrl,
+            releaseDate: animeReleaseDate));
+
+    notifyListeners();
+  }
+
+  void removeBookmark(String animeID) {
+    _bookmarks.remove(animeID);
+    notifyListeners();
   }
 }

@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         title: 'List of Popular Anime',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.indigo)
-              .copyWith(secondary: Colors.amber),
+              .copyWith(secondary: Colors.blue),
         ),
         home: const AnimeOverview(),
         routes: {AnimeDetailScreen.routeName: (context) => AnimeDetailScreen()},

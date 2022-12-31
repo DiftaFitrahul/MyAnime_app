@@ -28,5 +28,6 @@ class Anime with ChangeNotifier {
   void favoriteStatus() {
     isFavorite = !isFavorite;
     notifyListeners();
+    //function of notifyListener() is same as setState (to rebuild the widget) but it only rebuilt on the notifyListener's place
   }
 }

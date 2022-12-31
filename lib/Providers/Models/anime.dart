@@ -7,6 +7,7 @@ class Anime with ChangeNotifier {
   final String releaseDate;
   final String animeURL;
   bool isFavorite;
+  bool isBookmark;
 
   Anime(
       {this.animeId,
@@ -14,7 +15,8 @@ class Anime with ChangeNotifier {
       this.animeImg,
       this.releaseDate,
       this.animeURL,
-      this.isFavorite = false});
+      this.isFavorite = false,
+      this.isBookmark = false});
 
   factory Anime.fromJson(Map<String, dynamic> json) {
     return Anime(
@@ -29,5 +31,10 @@ class Anime with ChangeNotifier {
     isFavorite = !isFavorite;
     notifyListeners();
     //function of notifyListener() is same as setState (to rebuild the widget) but it only rebuilt on the notifyListener's place
+  }
+
+  void bookmarkStatus() {
+    isBookmark = !isBookmark;
+    notifyListeners();
   }
 }

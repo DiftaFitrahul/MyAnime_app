@@ -24,7 +24,7 @@ class AnimeWidget extends StatelessWidget {
               icon: (animeDatas.isFavorite)
                   ? const Icon(Icons.favorite)
                   : const Icon(Icons.favorite_border),
-              color: Theme.of(context).colorScheme.secondary,
+              color: Colors.amber,
             ),
           ),
           title: TextButton(
@@ -40,10 +40,16 @@ class AnimeWidget extends StatelessWidget {
                   color: Colors.white),
             ),
           ),
-          trailing: IconButton(
-            onPressed: (() {}),
-            color: Theme.of(context).colorScheme.secondary,
-            icon: const Icon(Icons.file_download_outlined),
+          trailing: Consumer<Anime>(
+            builder: (context, value, child) => IconButton(
+              onPressed: (() {
+                animeData.bookmarkStatus();
+              }),
+              color: Theme.of(context).colorScheme.secondary,
+              icon: (animeData.isBookmark)
+                  ? const Icon(Icons.bookmark)
+                  : const Icon(Icons.bookmark_border),
+            ),
           ),
         ),
         child: GestureDetector(

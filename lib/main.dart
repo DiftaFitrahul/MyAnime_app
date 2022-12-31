@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         title: 'List of Popular Anime',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.indigo)
-              .copyWith(secondary: Colors.blue),
+              .copyWith(secondary: Colors.amber),
         ),
         home: const AnimeOverview(),
         routes: {AnimeDetailScreen.routeName: (context) => AnimeDetailScreen()},
@@ -39,5 +39,11 @@ learn state management provider
 learn initState function is a function to inite some method or variable inside this function 
 and it is called only once when the app is built
 
+learn today
+1. MultiProvider
+2. uodate (key, value) method
+3. ifabsent method
+4. scaffoldMesengger.of(contex).showSnackbar
 
 */
+

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Providers/AnimesProvider.dart';
 import 'package:provider/provider.dart';
+
+import '../BookmarkProvider.dart';
 import '../screens/AnimeDetail.dart';
 import '../Models/anime.dart';
 
@@ -10,6 +11,7 @@ class AnimeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final animeData = Provider.of<Anime>(context, listen: false);
+    final animeBookmark = Provider.of<BookMarkProvider>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -43,6 +45,13 @@ class AnimeWidget extends StatelessWidget {
           trailing: Consumer<Anime>(
             builder: (context, value, child) => IconButton(
               onPressed: (() {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("succesfully added")));
+                animeBookmark.addBookmark(
+                    animeData.animeId,
+                    animeData.animeTitle,
+                    animeData.animeImg,
+                    animeData.releaseDate);
                 animeData.bookmarkStatus();
               }),
               color: Theme.of(context).colorScheme.secondary,

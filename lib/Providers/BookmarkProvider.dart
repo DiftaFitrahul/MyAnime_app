@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:myanimeapp/Providers/Models/anime.dart';
 import 'package:myanimeapp/Providers/Models/animeBookmark.dart';
 
-class BookMark with ChangeNotifier {
+class BookMarkProvider with ChangeNotifier {
   Map<String, AnimeBookmark> _bookmarks = {};
 
   Map<String, AnimeBookmark> get bookMark => _bookmarks;

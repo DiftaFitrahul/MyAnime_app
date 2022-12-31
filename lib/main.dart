@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/BookmarkProvider.dart';
 import 'package:myanimeapp/Statefull/Models/anime.dart';
 import 'package:provider/provider.dart';
 import 'Providers/AnimesProvider.dart';
@@ -14,8 +15,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AnimesProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AnimesProvider()),
+        ChangeNotifierProvider(create: ((context) => BookMarkProvider()))
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'List of Popular Anime',

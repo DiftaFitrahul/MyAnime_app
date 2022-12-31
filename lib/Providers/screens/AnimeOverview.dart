@@ -4,11 +4,13 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/AnimesProvider.dart';
 import 'package:myanimeapp/Providers/Widgets/AnimeGridView.dart';
+import 'package:myanimeapp/Providers/screens/AnimeBookmark.dart';
 import 'package:provider/provider.dart';
 import '../Widgets/AnimeItems.dart';
 
 import '../Service/fetchDataAnime.dart';
 import '../Models/anime.dart';
+import '../Widgets/Badge.dart';
 
 class AnimeOverview extends StatefulWidget {
   const AnimeOverview({Key key}) : super(key: key);
@@ -27,7 +29,20 @@ class _AnimeOverviewState extends State<AnimeOverview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("List of Popular Anime")),
+      appBar: AppBar(
+        title: const Text("List of Popular Anime"),
+        actions: [
+          Badge(
+            value: "0",
+            child: IconButton(
+              icon: const Icon(Icons.bookmarks_outlined),
+              onPressed: (() {
+                Navigator.of(context).pushNamed(BookmarkScreen.routeName);
+              }),
+            ),
+          )
+        ],
+      ),
       body: GestureDetector(child: Consumer<AnimesProvider>(
         builder: (context, value, child) {
           if (value.isLoading) {

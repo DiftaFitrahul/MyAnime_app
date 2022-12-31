@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/BookmarkProvider.dart';
+import 'package:myanimeapp/Providers/screens/AnimeBookmark.dart';
 import 'package:myanimeapp/Statefull/Models/anime.dart';
 import 'package:provider/provider.dart';
 import 'Providers/AnimesProvider.dart';
@@ -28,7 +29,10 @@ class MyApp extends StatelessWidget {
               .copyWith(secondary: Colors.amber),
         ),
         home: const AnimeOverview(),
-        routes: {AnimeDetailScreen.routeName: (context) => AnimeDetailScreen()},
+        routes: {
+          AnimeDetailScreen.routeName: (context) => const AnimeDetailScreen(),
+          BookmarkScreen.routeName: (context) => const BookmarkScreen()
+        },
       ),
     );
   }

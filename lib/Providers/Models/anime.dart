@@ -23,7 +23,7 @@ class Anime with ChangeNotifier {
         animeId: json['animeId'],
         animeTitle: json['animeTitle'],
         animeImg: json['animeImg'],
-        releaseDate: json['releaseDate'],
+        releaseDate: json['releasedDate'],
         animeURL: json['aniemUrl']);
   }
 

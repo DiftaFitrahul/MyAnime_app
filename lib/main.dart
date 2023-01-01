@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/BookmarkProvider.dart';
 import 'package:myanimeapp/Providers/screens/AnimeBookmark.dart';
-import 'package:myanimeapp/Statefull/Models/anime.dart';
+import './Providers/Models/anime.dart';
 import 'package:provider/provider.dart';
 import 'Providers/AnimesProvider.dart';
 import 'Providers/screens/AnimeDetail.dart';
@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AnimesProvider()),
-        ChangeNotifierProvider(create: ((context) => BookMarkProvider()))
+        ChangeNotifierProvider(create: (context) => BookMarkProvider()),
+        ChangeNotifierProvider(create: (context) => Anime())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

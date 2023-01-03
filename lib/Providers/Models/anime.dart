@@ -32,9 +32,4 @@ class Anime with ChangeNotifier {
     notifyListeners();
     //function of notifyListener() is same as setState (to rebuild the widget) but it only rebuilt on the notifyListener's place
   }
-
-  void bookmarkStatus() {
-    isBookmark = !isBookmark;
-    notifyListeners();
-  }
 }

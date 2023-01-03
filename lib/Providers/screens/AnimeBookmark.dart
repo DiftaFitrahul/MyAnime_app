@@ -15,8 +15,6 @@ class BookmarkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listBookmark = Provider.of<BookMarkProvider>(context, listen: false);
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       appBar: AppBar(title: const Text("Animes Bookmark")),
@@ -28,30 +26,31 @@ class BookmarkScreen extends StatelessWidget {
               style: TextStyle(color: Colors.white)),
           Consumer2<BookMarkProvider, AnimesProvider>(
               builder: (context, value, value2, child) {
-            final animeBookmark =
-                listBookmark.bookMark.keys.toList(growable: false);
             return Expanded(
-                child: (animeBookmark.isEmpty)
+                child: (value.idxBookMark.isEmpty)
                     ? const Text("Empty data",
                         style: TextStyle(color: Colors.white))
                     : ListView.builder(
-                        itemCount: listBookmark.bookmarkLength,
+                        itemCount: value.idxBookMark.length,
                         itemBuilder: (context, index) {
                           return ListTile(
                               leading: CircleAvatar(
-                                backgroundImage: NetworkImage(listBookmark
-                                    .bookMark[animeBookmark[index]].imageUrl),
+                                backgroundImage: NetworkImage(value2
+                                    .dataAnimes[value.idxBookMark[index]]
+                                    .animeImg),
                               ),
-                              title: Text(listBookmark
-                                  .bookMark[animeBookmark[index]].title),
-                              subtitle: Text(listBookmark
-                                  .bookMark[animeBookmark[index]].releaseDate),
+                              title: Text(value2
+                                  .dataAnimes[value.idxBookMark[index]]
+                                  .animeTitle),
+                              subtitle: Text(value2
+                                  .dataAnimes[value.idxBookMark[index]]
+                                  .releaseDate),
                               trailing: IconButton(
                                 icon: const Icon(Icons.delete),
                                 onPressed: (() {
                                   value2.bmStatus(value.idxBookMark[index]);
-                                  value.idxBookMark.removeAt(index);
-                                  value.removeBookmark(animeBookmark[index]);
+                                  value.removeAtIdxBookmark(index);
+                                  //value.removeBookmark(animeBookmark[index]);
                                 }),
                               ));
                         }));

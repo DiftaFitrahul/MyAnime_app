@@ -44,31 +44,22 @@ class AnimeWidget extends StatelessWidget {
                   color: Colors.white),
             ),
           ),
+          //so we get data in animes provider and change the status in animes provider
           trailing: Consumer<AnimesProvider>(
             builder: (context, value, child) => IconButton(
                 onPressed: (() {
+                  value.bmStatus(idx);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: (value.dataAnimes[idx].isBookmark == false)
-                        ? const Text("succesfully added")
-                        : const Text("succesfully removed"),
+                        ? const Text("succesfully removed")
+                        : const Text("succesfully added"),
                     duration: const Duration(milliseconds: 600),
                   ));
                   if (animeBookmark.idxBookMark.contains(idx)) {
-                    animeBookmark.idxBookMark.remove(idx);
+                    animeBookmark.removeIdxBookmark(idx);
                   } else {
-                    animeBookmark.idxBookMark.add(idx);
+                    animeBookmark.addIdxBookmark(idx);
                   }
-
-                  value.bmStatus(idx);
-                  (value.dataAnimes[idx].isBookmark == false)
-                      ? animeBookmark.removeBookmark(animeData.animeId)
-                      : animeBookmark.addBookmark(
-                          animeData.animeId,
-                          animeData.animeTitle,
-                          animeData.animeImg,
-                          animeData.releaseDate,
-                        );
-                  print(animeBookmark.idxBookMark);
                 }),
                 color: Colors.amber,
                 icon: (value.dataAnimes[idx].isBookmark == false)

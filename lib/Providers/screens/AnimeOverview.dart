@@ -35,8 +35,10 @@ class _AnimeOverviewState extends State<AnimeOverview> {
         title: const Text("List of Popular Anime"),
         actions: [
           Consumer<BookMarkProvider>(
-            builder: (context, value, icon) =>
-                Badge(value: value.bookmarkLength.toString(), child: icon),
+            builder: (context, value, icon) {
+              return Badge(
+                  value: value.idxBookMark.length.toString(), child: icon);
+            },
             child: IconButton(
               icon: const Icon(Icons.bookmarks_outlined),
               onPressed: (() {

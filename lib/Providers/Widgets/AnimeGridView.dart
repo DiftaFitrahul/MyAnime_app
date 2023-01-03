@@ -22,7 +22,7 @@ class AnimeGridView extends StatelessWidget {
         itemCount: allAnimes.length,
         itemBuilder: (context, index) => ChangeNotifierProvider.value(
               value: allAnimes[index],
-              child: const AnimeWidget(),
+              child: AnimeWidget(idx: index),
             ));
   }
 }

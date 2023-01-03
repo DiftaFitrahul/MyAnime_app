@@ -17,4 +17,9 @@ class AnimesProvider with ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
+  void bmStatus(index) {
+    dataAnimes[index].isBookmark = !dataAnimes[index].isBookmark;
+    notifyListeners();
+  }
 }

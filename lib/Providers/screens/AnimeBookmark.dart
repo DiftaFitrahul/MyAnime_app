@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:myanimeapp/Providers/AnimesProvider.dart';
 
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,6 @@ class BookmarkScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final listBookmark = Provider.of<BookMarkProvider>(context, listen: false);
-    //List<Map<String, dynamic>> animeBookmark = [];
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
@@ -26,7 +26,7 @@ class BookmarkScreen extends StatelessWidget {
         children: [
           const Text("Your Bookmark List",
               style: TextStyle(color: Colors.white)),
-          Consumer2<BookMarkProvider, Anime>(
+          Consumer2<BookMarkProvider, AnimesProvider>(
               builder: (context, value, value2, child) {
             final animeBookmark =
                 listBookmark.bookMark.keys.toList(growable: false);
@@ -49,8 +49,8 @@ class BookmarkScreen extends StatelessWidget {
                               trailing: IconButton(
                                 icon: const Icon(Icons.delete),
                                 onPressed: (() {
-                                  //value2.isBookmark == false;
-
+                                  value2.bmStatus(value.idxBookMark[index]);
+                                  value.idxBookMark.removeAt(index);
                                   value.removeBookmark(animeBookmark[index]);
                                 }),
                               ));

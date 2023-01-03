@@ -7,6 +7,8 @@ class BookMarkProvider with ChangeNotifier {
 
   Map<String, AnimeBookmark> get bookMark => _bookmarks;
 
+  List<int> idxBookMark = [];
+
   int get bookmarkLength {
     return _bookmarks.length;
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/AnimesProvider.dart';
 import 'package:provider/provider.dart';
 
 import '../BookmarkProvider.dart';
@@ -6,7 +7,8 @@ import '../screens/AnimeDetail.dart';
 import '../Models/anime.dart';
 
 class AnimeWidget extends StatelessWidget {
-  const AnimeWidget({Key key}) : super(key: key);
+  const AnimeWidget({Key key, @required this.idx}) : super(key: key);
+  final int idx;
 
   @override
   Widget build(BuildContext context) {
@@ -42,29 +44,36 @@ class AnimeWidget extends StatelessWidget {
                   color: Colors.white),
             ),
           ),
-          trailing: Consumer<Anime>(
+          trailing: Consumer<AnimesProvider>(
             builder: (context, value, child) => IconButton(
-              onPressed: (() {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: (animeData.isBookmark == false)
-                      ? const Text("succesfully added")
-                      : const Text("succesfully removed"),
-                  duration: const Duration(milliseconds: 600),
-                ));
-                animeData.bookmarkStatus();
-                (animeData.isBookmark == false)
-                    ? animeBookmark.removeBookmark(animeData.animeId)
-                    : animeBookmark.addBookmark(
-                        animeData.animeId,
-                        animeData.animeTitle,
-                        animeData.animeImg,
-                        animeData.releaseDate);
-              }),
-              color: Colors.amber,
-              icon: (animeData.isBookmark)
-                  ? const Icon(Icons.bookmark)
-                  : const Icon(Icons.bookmark_border),
-            ),
+                onPressed: (() {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: (value.dataAnimes[idx].isBookmark == false)
+                        ? const Text("succesfully added")
+                        : const Text("succesfully removed"),
+                    duration: const Duration(milliseconds: 600),
+                  ));
+                  if (animeBookmark.idxBookMark.contains(idx)) {
+                    animeBookmark.idxBookMark.remove(idx);
+                  } else {
+                    animeBookmark.idxBookMark.add(idx);
+                  }
+
+                  value.bmStatus(idx);
+                  (value.dataAnimes[idx].isBookmark == false)
+                      ? animeBookmark.removeBookmark(animeData.animeId)
+                      : animeBookmark.addBookmark(
+                          animeData.animeId,
+                          animeData.animeTitle,
+                          animeData.animeImg,
+                          animeData.releaseDate,
+                        );
+                  print(animeBookmark.idxBookMark);
+                }),
+                color: Colors.amber,
+                icon: (value.dataAnimes[idx].isBookmark == false)
+                    ? const Icon(Icons.bookmark_border)
+                    : const Icon(Icons.bookmark)),
           ),
         ),
         child: GestureDetector(

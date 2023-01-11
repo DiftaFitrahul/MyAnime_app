@@ -8,14 +8,14 @@ import '../Service/fetchDataAnime.dart';
 import '../Models/anime.dart';
 
 class AnimeOverview extends StatefulWidget {
-  const AnimeOverview({Key key}) : super(key: key);
+  const AnimeOverview({Key? key}) : super(key: key);
 
   @override
   State<AnimeOverview> createState() => _AnimeOverviewState();
 }
 
 class _AnimeOverviewState extends State<AnimeOverview> {
-  Future<List<Anime>> futureAnime;
+  late Future<List<Anime>> futureAnime;
 
   //this method to initialize the service
   //initState Method just call once when the application is being built
@@ -40,9 +40,9 @@ class _AnimeOverviewState extends State<AnimeOverview> {
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                     mainAxisExtent: 300),
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data?.length,
                 itemBuilder: (context, index) {
-                  return AnimeWidget(snapshot.data, index);
+                  return AnimeWidget(snapshot.data!, index);
                 },
               );
             } else if (snapshot.hasError) {

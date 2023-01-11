@@ -10,7 +10,7 @@ import '../Models/anime.dart';
 import '../BookmarkProvider.dart';
 
 class BookmarkScreen extends StatelessWidget {
-  const BookmarkScreen({Key key}) : super(key: key);
+  const BookmarkScreen({Key? key}) : super(key: key);
   static const routeName = '/Animes-bookmark';
 
   @override
@@ -60,7 +60,7 @@ class BookmarkScreen extends StatelessWidget {
     );
   }
 
-  Widget deleteBook() {}
+  Widget? deleteBook() {}
 }
 
 /*

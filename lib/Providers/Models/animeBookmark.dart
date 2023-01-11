@@ -4,10 +4,10 @@ class AnimeBookmark {
   final String title;
   final String imageUrl;
   final String releaseDate;
-  bool isDelete;
+  bool isDelete = false;
 
   AnimeBookmark(
-      {@required this.title,
-      @required this.imageUrl,
-      @required this.releaseDate});
+      {required this.title,
+      required this.imageUrl,
+      required this.releaseDate});
 }

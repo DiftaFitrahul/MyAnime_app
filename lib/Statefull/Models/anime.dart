@@ -6,11 +6,11 @@ class Anime {
   final String animeURL;
 
   const Anime(
-      {this.animeId,
-      this.animeTitle,
-      this.animeImg,
-      this.releaseDate,
-      this.animeURL});
+      {required this.animeId,
+      required this.animeTitle,
+      required this.animeImg,
+      required this.releaseDate,
+      required this.animeURL});
 
   factory Anime.fromJson(Map<String, dynamic> json) {
     return Anime(

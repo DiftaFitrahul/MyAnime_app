@@ -6,7 +6,7 @@ import '../Models/anime.dart';
 class AnimeWidget extends StatelessWidget {
   final List<Anime> datas;
   final int index;
-  const AnimeWidget(this.datas, this.index, {Key key}) : super(key: key);
+  const AnimeWidget(this.datas, this.index, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

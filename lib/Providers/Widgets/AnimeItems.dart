@@ -7,7 +7,7 @@ import '../screens/AnimeDetail.dart';
 import '../Models/anime.dart';
 
 class AnimeWidget extends StatelessWidget {
-  const AnimeWidget({Key key, @required this.idx}) : super(key: key);
+  const AnimeWidget({Key? key, required this.idx}) : super(key: key);
   final int idx;
 
   @override
@@ -20,12 +20,12 @@ class AnimeWidget extends StatelessWidget {
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           // Consumer is always listen
-          leading: Consumer<Anime>(
-            builder: (context, animeDatas, child) => IconButton(
+          leading: Consumer<AnimesProvider>(
+            builder: (context, value, child) => IconButton(
               onPressed: () {
-                animeData.favoriteStatus();
+                value.favoriteStatus(idx);
               },
-              icon: (animeDatas.isFavorite)
+              icon: (value.dataAnimes[idx].isFavorite)
                   ? const Icon(Icons.favorite)
                   : const Icon(Icons.favorite_border),
               color: Colors.amber,

@@ -14,7 +14,7 @@ import '../Models/anime.dart';
 import '../Widgets/Badge.dart';
 
 class AnimeOverview extends StatefulWidget {
-  const AnimeOverview({Key key}) : super(key: key);
+  const AnimeOverview({Key? key}) : super(key: key);
 
   @override
   State<AnimeOverview> createState() => _AnimeOverviewState();
@@ -37,7 +37,16 @@ class _AnimeOverviewState extends State<AnimeOverview> {
           Consumer<BookMarkProvider>(
             builder: (context, value, icon) {
               return Badge(
-                  value: value.idxBookMark.length.toString(), child: icon);
+                value: value.idxBookMark.length.toString(),
+                child: icon ??
+                    IconButton(
+                      icon: const Icon(Icons.bookmarks_outlined),
+                      onPressed: (() {
+                        Navigator.of(context)
+                            .pushNamed(BookmarkScreen.routeName);
+                      }),
+                    ),
+              );
             },
             child: IconButton(
               icon: const Icon(Icons.bookmarks_outlined),

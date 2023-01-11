@@ -6,7 +6,7 @@ import './AnimeItems.dart';
 
 class AnimeGridView extends StatelessWidget {
   const AnimeGridView({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

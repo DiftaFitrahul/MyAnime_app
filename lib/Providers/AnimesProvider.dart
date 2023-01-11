@@ -22,4 +22,10 @@ class AnimesProvider with ChangeNotifier {
     dataAnimes[index].isBookmark = !dataAnimes[index].isBookmark;
     notifyListeners();
   }
+
+  void favoriteStatus(index) {
+    dataAnimes[index].isFavorite = !dataAnimes[index].isFavorite;
+    notifyListeners();
+    //function of notifyListener() is same as setState (to rebuild the widget) but it only rebuilt on the notifyListener's place
+  }
 }

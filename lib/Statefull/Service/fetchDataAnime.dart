@@ -16,7 +16,7 @@ class FetchDataAnime {
         throw Exception('Failed to load Animes');
       }
     } catch (e) {
-      log(e.toString());
+      rethrow;
     }
   }
 }

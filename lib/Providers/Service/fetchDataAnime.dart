@@ -5,6 +5,7 @@ import '../Models/anime.dart';
 
 class FetchDataAnime {
   static Future<List<Anime>> fetchAnime() async {
+    
     final response =
         await http.get(Uri.parse('https://gogoanime.consumet.org/popular'));
     if (response.statusCode == 200) {

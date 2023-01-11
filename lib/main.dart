@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.indigo)
               .copyWith(secondary: Colors.amber),
         ),
-        home: const AnimeOverview(),
+        home: AnimeOverview(),
         routes: {
           AnimeDetailScreen.routeName: (context) => const AnimeDetailScreen(),
           BookmarkScreen.routeName: (context) => const BookmarkScreen()

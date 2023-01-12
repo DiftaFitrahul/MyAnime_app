@@ -71,6 +71,8 @@ class _AnimeOverviewState extends State<AnimeOverview> {
         },
       )),
       floatingActionButton: FloatingActionButton(
+        foregroundColor: Colors.white,
+        backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),
         onPressed: () {},
       ),

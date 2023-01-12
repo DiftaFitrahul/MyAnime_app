@@ -24,11 +24,12 @@ class AnimeDetailScreen extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       appBar: AppBar(title: Text(anime.animeTitle)),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.41,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fill,
@@ -37,7 +38,7 @@ class AnimeDetailScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.41,
                 foregroundDecoration: const BoxDecoration(
                     gradient: LinearGradient(
                         colors: [
@@ -46,21 +47,99 @@ class AnimeDetailScreen extends StatelessWidget {
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        stops: [0.6, 1.0])),
+                        stops: [0.3, 1.0])),
               ),
               Positioned(
-                
+                left: 12,
+                bottom: 0,
+                width: 350,
                 child: Text(
                   anime.animeTitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                      color: Colors.white,
                       fontSize: 30,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
               )
             ],
           ),
-          Center(child: Text('This is an Anime of index ${anime.animeImg}')),
+          const Padding(
+            padding: EdgeInsets.only(left: 12, top: 8),
+            child: Text(
+              'Action, Adventure, Shounen, Magic, Historical',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 12, top: 15),
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: 17),
+                  width: 160,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.amber[700],
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Material(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.transparent,
+                    child: InkWell(
+                      splashColor: Colors.blue,
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 10),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: const [
+                              Text(
+                                'Play',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(
+                                Icons.play_circle_outline_sharp,
+                                color: Colors.white,
+                                size: 40,
+                              )
+                            ]),
+                      ),
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.symmetric(vertical: 8)),
+                      backgroundColor: MaterialStateProperty.all(Colors.black)),
+                  child: const Icon(
+                    Icons.favorite_border_outlined,
+                    color: Colors.white,
+                    size: 31,
+                  ),
+                ),
+                const SizedBox(width: 17),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.symmetric(vertical: 8)),
+                      backgroundColor: MaterialStateProperty.all(Colors.black)),
+                  child: const Icon(
+                    Icons.file_download_outlined,
+                    color: Colors.white,
+                    size: 31,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

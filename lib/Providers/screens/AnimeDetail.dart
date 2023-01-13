@@ -167,7 +167,7 @@ class AnimeDetailScreen extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 12, top: 30),
+                padding: EdgeInsets.only(left: 12, top: 40),
                 child: Text(
                   'Synopsis',
                   style: TextStyle(
@@ -201,29 +201,34 @@ class AnimeDetailScreen extends StatelessWidget {
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: todays_Selection.length,
-                      itemBuilder: ((context, index) => Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 140,
-                                margin: const EdgeInsets.only(right: 10),
-                                child: Image(
+                      itemBuilder: ((context, index) => Container(
+                            width: 140,
+                            margin: const EdgeInsets.only(right: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image(
                                   fit: BoxFit.fill,
                                   image: NetworkImage(
                                       todays_Selection[index].animeImg),
                                 ),
-                              ),
-                              Container(
-                                width: 140,
-                                padding:
-                                    const EdgeInsets.only(right: 10, top: 5),
-                                child: Text(
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
                                   todays_Selection[index].animeTitle,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(color: Colors.white),
                                 ),
-                              )
-                            ],
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  todays_Selection[index].releaseDate,
+                                  style: const TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
                           ))),
                 ),
               ),

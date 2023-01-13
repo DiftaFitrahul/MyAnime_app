@@ -48,7 +48,7 @@ class AnimeDetailScreen extends StatelessWidget {
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        stops: [0.3, 1.0])),
+                        stops: [0.44, 1.0])),
               ),
               Positioned(
                 left: 12,

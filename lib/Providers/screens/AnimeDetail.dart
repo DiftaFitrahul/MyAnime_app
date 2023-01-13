@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:myanimeapp/Providers/AnimesProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:readmore/readmore.dart';
 
 class AnimeDetailScreen extends StatelessWidget {
   static const routeName = '/Anime-detail';
@@ -149,6 +150,9 @@ class AnimeDetailScreen extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          SingleChildScrollView(
+            child: ReadMoreText(''),
           )
         ],
       ),

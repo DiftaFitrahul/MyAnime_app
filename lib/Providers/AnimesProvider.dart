@@ -1,4 +1,5 @@
 import 'dart:convert';
+import "dart:math";
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,11 @@ import './Models/anime.dart';
 import 'package:http/http.dart' as http;
 
 class AnimesProvider with ChangeNotifier {
+  Random random = Random();
   List<Anime> _dataAnimes = [];
   List<Anime> get dataAnimes => _dataAnimes;
   bool isLoading = false;
+  List<Anime> animeSelection = [];
 
   Future<void> getAllAnimes() async {
     isLoading = true;

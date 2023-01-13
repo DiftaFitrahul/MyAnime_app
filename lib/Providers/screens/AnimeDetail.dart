@@ -13,6 +13,7 @@ class AnimeDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final animeId = ModalRoute.of(context)?.settings.arguments as String;
+    final dataAnime = Provider.of<AnimesProvider>(context, listen: false);
     final anime = Provider.of<AnimesProvider>(context, listen: false)
         .dataAnimes
         .firstWhere(
@@ -113,15 +114,24 @@ class AnimeDetailScreen extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    dataAnime.favoriteStatusinDetailScreen(animeId);
+                  },
                   style: ButtonStyle(
                       padding: MaterialStateProperty.all(
                           const EdgeInsets.symmetric(vertical: 8)),
                       backgroundColor: MaterialStateProperty.all(Colors.black)),
-                  child: const Icon(
-                    Icons.favorite_border_outlined,
-                    color: Colors.white,
-                    size: 31,
+                  child: Consumer<AnimesProvider>(
+                    builder: (context, value, child) => Icon(
+                      value.dataAnimes
+                              .firstWhere(
+                                  (element) => element.animeId == animeId)
+                              .isFavorite
+                          ? Icons.favorite_outlined
+                          : Icons.favorite_border_outlined,
+                      color: Colors.red,
+                      size: 31,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 17),

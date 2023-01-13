@@ -28,4 +28,10 @@ class AnimesProvider with ChangeNotifier {
     notifyListeners();
     //function of notifyListener() is same as setState (to rebuild the widget) but it only rebuilt on the notifyListener's place
   }
+
+  void favoriteStatusinDetailScreen(id) {
+    dataAnimes.firstWhere((element) => element.animeId == id).isFavorite =
+        !dataAnimes.firstWhere((element) => element.animeId == id).isFavorite;
+    notifyListeners();
+  }
 }

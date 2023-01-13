@@ -87,7 +87,7 @@ class AnimeDetailScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.transparent,
                     child: InkWell(
-                      splashColor: Colors.blue,
+                      splashColor: Colors.amber.shade400,
                       onTap: () {},
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20, right: 10),

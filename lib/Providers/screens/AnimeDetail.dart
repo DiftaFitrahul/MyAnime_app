@@ -23,8 +23,7 @@ class AnimeDetailScreen extends StatelessWidget {
         return animes.animeId == animeId;
       },
     );
-    Random random = new Random();
-    List<Anime> todays_Selection = [
+    List<Anime> todaysSelection = [
       dataAnime.dataAnimes[1],
       dataAnime.dataAnimes[3],
       dataAnime.dataAnimes[5],
@@ -200,7 +199,7 @@ class AnimeDetailScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 12, top: 10),
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: todays_Selection.length,
+                      itemCount: todaysSelection.length,
                       itemBuilder: ((context, index) => Container(
                             width: 140,
                             margin: const EdgeInsets.only(right: 15),
@@ -210,13 +209,13 @@ class AnimeDetailScreen extends StatelessWidget {
                                 Image(
                                   fit: BoxFit.fill,
                                   image: NetworkImage(
-                                      todays_Selection[index].animeImg),
+                                      todaysSelection[index].animeImg),
                                 ),
                                 const SizedBox(
                                   height: 5,
                                 ),
                                 Text(
-                                  todays_Selection[index].animeTitle,
+                                  todaysSelection[index].animeTitle,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(color: Colors.white),
                                 ),
@@ -224,7 +223,7 @@ class AnimeDetailScreen extends StatelessWidget {
                                   height: 5,
                                 ),
                                 Text(
-                                  todays_Selection[index].releaseDate,
+                                  todaysSelection[index].releaseDate,
                                   style: const TextStyle(color: Colors.grey),
                                 ),
                               ],

@@ -150,7 +150,7 @@ class SearchPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
+            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -169,17 +169,35 @@ class SearchPage extends StatelessWidget {
               ],
             ),
           ),
-          // Expanded(
-          //   child: ListView.builder(
-          //       itemCount: 5,
-          //       itemBuilder: ((context, index) {
-          //         return Container(
-          //           width: 100,
-          //           height: 100,
-          //           color: Colors.red,
-          //         );
-          //       })),
-          // )
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: 5,
+                  itemBuilder: ((context, index) {
+                    return Container(
+                      height: 150,
+                      margin: const EdgeInsets.only(bottom: 17),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            height: 150,
+                            width: 110,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(13),
+                              child: Image(
+                                  fit: BoxFit.fill,
+                                  image:
+                                      NetworkImage(popularNow[index].animeImg)),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  })),
+            ),
+          )
         ],
       ),
     );

@@ -2,12 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:myanimeapp/Providers/AnimesProvider.dart';
+import 'package:provider/provider.dart';
+
+import '../Models/anime.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dataAnime = Provider.of<AnimesProvider>(context, listen: false);
+    List<Anime> popularNow = [
+      dataAnime.dataAnimes[11],
+      dataAnime.dataAnimes[8],
+      dataAnime.dataAnimes[6],
+      dataAnime.dataAnimes[13],
+      dataAnime.dataAnimes[10],
+    ];
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       body: SingleChildScrollView(
@@ -70,7 +82,7 @@ class SearchPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 15, right: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -81,8 +93,60 @@ class SearchPage extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         fontSize: 23),
                   ),
-                  TextButton(onPressed: () {}, child: Text('See More'))
+                  TextButton(onPressed: () {}, child: const Text('See More'))
                 ],
+              ),
+            ),
+            SizedBox(
+              height: 600,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: popularNow.length,
+                    itemBuilder: ((context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        height: 350,
+                        width: 230,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 280,
+                              width: 220,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Image(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                        popularNow[index].animeImg)),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12),
+                              child: Text(
+                                popularNow[index].animeTitle,
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Colors.white),
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 8),
+                              child: Text(
+                                'Action, History, Drama, Fantasy, Adventure',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Color.fromARGB(255, 134, 134, 134)),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    })),
               ),
             )
           ],

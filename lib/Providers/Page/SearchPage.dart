@@ -19,11 +19,11 @@ class SearchPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 40,
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.70,
                     child: TextField(
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(top: 10),
+                          contentPadding: const EdgeInsets.only(top: 12),
                           hintText: 'Search',
                           hintStyle:
                               TextStyle(color: Colors.grey.withOpacity(0.7)),
@@ -38,10 +38,33 @@ class SearchPage extends StatelessWidget {
                       onSubmitted: (value) {},
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text('makan'),
-                  )
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Stack(children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 49, 73, 92),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          minimumSize: Size.zero,
+                          padding: const EdgeInsets.all(10)),
+                      onPressed: (() {}),
+                      child: const Icon(Icons.notifications),
+                    ),
+                    Positioned(
+                      right: 16,
+                      top: 16,
+                      child: Container(
+                        padding: const EdgeInsets.all(2.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.red),
+                        constraints:
+                            const BoxConstraints(minHeight: 5, minWidth: 5),
+                      ),
+                    )
+                  ])
                 ],
               ),
             ),

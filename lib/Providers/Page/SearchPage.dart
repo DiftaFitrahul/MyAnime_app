@@ -14,13 +14,14 @@ class SearchPage extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 10),
+              padding: const EdgeInsets.only(
+                  top: 40, bottom: 20, left: 10, right: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: 50,
-                    width: MediaQuery.of(context).size.width * 0.70,
+                    width: MediaQuery.of(context).size.width * 0.77,
                     child: TextField(
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(top: 12),
@@ -68,6 +69,22 @@ class SearchPage extends StatelessWidget {
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Popular Now",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 23),
+                  ),
+                  TextButton(onPressed: () {}, child: Text('See More'))
+                ],
+              ),
+            )
           ],
         ),
       ),

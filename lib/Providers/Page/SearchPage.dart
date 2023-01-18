@@ -12,15 +12,6 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dataAnime = Provider.of<AnimesProvider>(context, listen: false);
-
-    List<Anime> winter2022 = [
-      dataAnime.dataAnimes[15],
-      dataAnime.dataAnimes[16],
-      dataAnime.dataAnimes[17],
-      dataAnime.dataAnimes[18],
-      dataAnime.dataAnimes[19],
-    ];
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       body: SingleChildScrollView(
@@ -178,79 +169,83 @@ class SearchPage extends StatelessWidget {
               height: 300,
               child: Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    itemCount: 5,
-                    itemBuilder: ((context, index) {
-                      return Container(
-                        height: 150,
-                        margin: const EdgeInsets.only(bottom: 17),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              height: 150,
-                              width: 110,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(13),
-                                child: Image(
-                                    fit: BoxFit.fill,
-                                    image: NetworkImage(
-                                        winter2022[index].animeImg)),
-                              ),
-                            ),
-                            Flexible(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      winter2022[index].animeTitle,
-                                      style: TextStyle(
-                                          color: Colors.white.withOpacity(0.9),
-                                          fontWeight: FontWeight.w500,
-                                          overflow: TextOverflow.visible,
-                                          fontSize: 19),
-                                    ),
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 5, bottom: 5),
-                                      child: Text(
-                                        'Action, Romance, Slice of Life',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            overflow: TextOverflow.ellipsis,
-                                            color: Color.fromARGB(
-                                                255, 116, 116, 116)),
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.star_rate,
-                                          color: Colors.yellow,
-                                          size: 17,
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          '8.33',
-                                          style: TextStyle(
-                                              color: Colors.grey[400]),
-                                        )
-                                      ],
-                                    )
-                                  ],
+                child: Consumer<AnimesProvider>(
+                  builder: (context, value, child) => ListView.builder(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      itemCount: value.winter2022.length,
+                      itemBuilder: ((context, index) {
+                        return Container(
+                          height: 150,
+                          margin: const EdgeInsets.only(bottom: 17),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                height: 150,
+                                width: 110,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(13),
+                                  child: Image(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(
+                                          value.winter2022[index].animeImg)),
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                      );
-                    })),
+                              Flexible(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        value.winter2022[index].animeTitle,
+                                        style: TextStyle(
+                                            color:
+                                                Colors.white.withOpacity(0.9),
+                                            fontWeight: FontWeight.w500,
+                                            overflow: TextOverflow.visible,
+                                            fontSize: 19),
+                                      ),
+                                      const Padding(
+                                        padding:
+                                            EdgeInsets.only(top: 5, bottom: 5),
+                                        child: Text(
+                                          'Action, Romance, Slice of Life',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              overflow: TextOverflow.ellipsis,
+                                              color: Color.fromARGB(
+                                                  255, 116, 116, 116)),
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.star_rate,
+                                            color: Colors.yellow,
+                                            size: 17,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            '8.33',
+                                            style: TextStyle(
+                                                color: Colors.grey[400]),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      })),
+                ),
               ),
             )
           ],

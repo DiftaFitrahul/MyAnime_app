@@ -13,13 +13,6 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dataAnime = Provider.of<AnimesProvider>(context, listen: false);
-    List<Anime> popularNow = [
-      dataAnime.dataAnimes[11],
-      dataAnime.dataAnimes[8],
-      dataAnime.dataAnimes[6],
-      dataAnime.dataAnimes[13],
-      dataAnime.dataAnimes[10],
-    ];
 
     List<Anime> winter2022 = [
       dataAnime.dataAnimes[15],
@@ -110,52 +103,55 @@ class SearchPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(
                     left: 15, right: 15, top: 10, bottom: 25),
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: popularNow.length,
-                    itemBuilder: ((context, index) {
-                      return Container(
-                        margin: const EdgeInsets.only(right: 20),
-                        height: 350,
-                        width: 230,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 280,
-                              width: 220,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Image(
-                                    fit: BoxFit.fill,
-                                    image: NetworkImage(
-                                        popularNow[index].animeImg)),
+                child: Consumer<AnimesProvider>(
+                  builder: (context, value, child) => ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: value.popularNow.length,
+                      itemBuilder: ((context, index) {
+                        return Container(
+                          margin: const EdgeInsets.only(right: 20),
+                          height: 350,
+                          width: 230,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 280,
+                                width: 220,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(
+                                          value.popularNow[index].animeImg)),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 12),
-                              child: Text(
-                                popularNow[index].animeTitle,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    overflow: TextOverflow.ellipsis,
-                                    color: Colors.white.withOpacity(0.9)),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: Text(
+                                  value.popularNow[index].animeTitle,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      overflow: TextOverflow.ellipsis,
+                                      color: Colors.white.withOpacity(0.9)),
+                                ),
                               ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Text(
-                                'Action, History, Drama, Fantasy, Adventure',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    overflow: TextOverflow.ellipsis,
-                                    color: Color.fromARGB(255, 116, 116, 116)),
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    })),
+                              const Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Text(
+                                  'Action, History, Drama, Fantasy, Adventure',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      overflow: TextOverflow.ellipsis,
+                                      color:
+                                          Color.fromARGB(255, 116, 116, 116)),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      })),
+                ),
               ),
             ),
             Padding(

@@ -13,6 +13,7 @@ class AnimesProvider with ChangeNotifier {
   List<Anime> get dataAnimes => _dataAnimes;
   bool isLoading = false;
   List<Anime> animeSelection = [];
+  List<Anime> popularNow = [];
 
   Future<void> getAllAnimes() async {
     isLoading = true;
@@ -25,6 +26,13 @@ class AnimesProvider with ChangeNotifier {
       _dataAnimes[7],
       _dataAnimes[2],
       _dataAnimes[4]
+    ]);
+    popularNow.addAll([
+      _dataAnimes[11],
+      _dataAnimes[8],
+      _dataAnimes[6],
+      _dataAnimes[13],
+      _dataAnimes[10]
     ]);
 
     notifyListeners();

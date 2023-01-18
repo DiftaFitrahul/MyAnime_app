@@ -18,6 +18,15 @@ class AnimesProvider with ChangeNotifier {
     isLoading = true;
     _dataAnimes = await FetchDataAnime.fetchAnime();
     isLoading = false;
+    animeSelection.addAll([
+      _dataAnimes[1],
+      _dataAnimes[3],
+      _dataAnimes[5],
+      _dataAnimes[7],
+      _dataAnimes[2],
+      _dataAnimes[4]
+    ]);
+
     notifyListeners();
   }
 

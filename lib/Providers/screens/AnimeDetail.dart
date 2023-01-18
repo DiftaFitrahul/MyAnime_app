@@ -23,14 +23,7 @@ class AnimeDetailScreen extends StatelessWidget {
         return animes.animeId == animeId;
       },
     );
-    List<Anime> todaysSelection = [
-      dataAnime.dataAnimes[1],
-      dataAnime.dataAnimes[3],
-      dataAnime.dataAnimes[5],
-      dataAnime.dataAnimes[7],
-      dataAnime.dataAnimes[2],
-      dataAnime.dataAnimes[4]
-    ];
+
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 2, 23, 56),
         appBar: AppBar(title: Text(anime.animeTitle)),
@@ -197,38 +190,40 @@ class AnimeDetailScreen extends StatelessWidget {
                 height: 260,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 12, top: 10),
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: todaysSelection.length,
-                      itemBuilder: ((context, index) => Container(
-                            width: 140,
-                            margin: const EdgeInsets.only(right: 15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                      todaysSelection[index].animeImg),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  todaysSelection[index].animeTitle,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  todaysSelection[index].releaseDate,
-                                  style: const TextStyle(color: Colors.grey),
-                                ),
-                              ],
-                            ),
-                          ))),
+                  child: Consumer<AnimesProvider>(
+                    builder: (context, value, child) => ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: value.animeSelection.length,
+                        itemBuilder: ((context, index) => Container(
+                              width: 140,
+                              margin: const EdgeInsets.only(right: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Image(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                        value.animeSelection[index].animeImg),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    value.animeSelection[index].animeTitle,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    value.animeSelection[index].releaseDate,
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                            ))),
+                  ),
                 ),
               ),
               const SizedBox(

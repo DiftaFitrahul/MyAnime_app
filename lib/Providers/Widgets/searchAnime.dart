@@ -168,6 +168,7 @@ class SearchAnimeItem extends StatelessWidget {
               child: Consumer<AnimesProvider>(
                 builder: (context, value, child) => ListView.builder(
                     shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
                     itemCount: value.winter2022.length,
                     itemBuilder: ((context, index) {

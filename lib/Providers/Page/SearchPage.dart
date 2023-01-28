@@ -13,18 +13,23 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 2, 23, 56),
-        body: Consumer<AnimesProvider>(builder: (context, value, child) {
-          if (value.isLoading) {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height / 0.8,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-          return const SearchAnimeItem();
-        }));
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+          backgroundColor: const Color.fromARGB(255, 2, 23, 56),
+          body: Consumer<AnimesProvider>(builder: (context, value, child) {
+            if (value.isLoading) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height / 0.8,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+            return const SearchAnimeItem();
+          })),
+    );
   }
 }

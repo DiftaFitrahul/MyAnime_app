@@ -184,7 +184,7 @@ class AnimeDetailScreen extends StatelessWidget {
                         fontWeight: FontWeight.w400),
                   )),
               SizedBox(
-                height: 260,
+                height: 290,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 12, top: 10),
                   child: Consumer<AnimesProvider>(
@@ -197,10 +197,13 @@ class AnimeDetailScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image(
-                                    fit: BoxFit.fill,
-                                    image: NetworkImage(
-                                        value.animeSelection[index].animeImg),
+                                  SizedBox(
+                                    height: 200,
+                                    child: Image(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(
+                                          value.animeSelection[index].animeImg),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 5,

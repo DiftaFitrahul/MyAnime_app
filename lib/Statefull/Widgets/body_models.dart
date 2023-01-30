@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Statefull/screens/AnimeDetail.dart';
-import '../Service/fetchDataAnime.dart';
+import 'package:myanimeapp/Statefull/screens/anime_detail.dart';
+
 import '../Models/anime.dart';
 
 class AnimeWidget extends StatelessWidget {

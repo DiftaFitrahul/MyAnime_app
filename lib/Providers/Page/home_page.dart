@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:myanimeapp/Providers/Page/AccountPage.dart';
-import 'package:myanimeapp/Providers/Page/FavoritePage.dart';
-import 'package:myanimeapp/Providers/Page/SearchPage.dart';
-import 'package:myanimeapp/Providers/screens/AnimeOverview.dart';
+import 'package:myanimeapp/Providers/Page/account_page.dart';
+import 'package:myanimeapp/Providers/Page/favorite_page.dart';
+import 'package:myanimeapp/Providers/Page/search_page.dart';
+import 'package:myanimeapp/Providers/screens/anime_overview.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

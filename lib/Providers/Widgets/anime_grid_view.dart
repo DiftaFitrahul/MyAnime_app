@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../AnimesProvider.dart';
-import './AnimeItems.dart';
+import '../animes_provider.dart';
+import 'anime_items.dart';
 
 class AnimeGridView extends StatelessWidget {
   const AnimeGridView({

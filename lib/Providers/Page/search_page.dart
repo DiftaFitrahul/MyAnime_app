@@ -1,12 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:myanimeapp/Providers/AnimesProvider.dart';
-import 'package:myanimeapp/Providers/Widgets/searchAnime.dart';
+import 'package:myanimeapp/Providers/animes_provider.dart';
+import 'package:myanimeapp/Providers/Widgets/search_anime.dart';
 import 'package:provider/provider.dart';
-
-import '../Models/anime.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});

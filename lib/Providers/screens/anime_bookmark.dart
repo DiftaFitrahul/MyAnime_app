@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:myanimeapp/Providers/AnimesProvider.dart';
+import 'package:myanimeapp/Providers/animes_provider.dart';
 
 import 'package:provider/provider.dart';
 
-import '../Models/anime.dart';
-import '../BookmarkProvider.dart';
+import '../bookmark_provider.dart';
 
 class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({Key? key}) : super(key: key);
@@ -60,7 +56,6 @@ class BookmarkScreen extends StatelessWidget {
     );
   }
 
-  Widget? deleteBook() {}
 }
 
 /*

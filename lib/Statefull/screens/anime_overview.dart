@@ -1,10 +1,7 @@
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Statefull/Widgets/bodyModels.dart';
+import 'package:myanimeapp/Statefull/Widgets/body_models.dart';
 
-import '../Service/fetchDataAnime.dart';
+import '../Service/fetch_data_anime.dart';
 import '../Models/anime.dart';
 
 class AnimeOverview extends StatefulWidget {
@@ -28,7 +25,7 @@ class _AnimeOverviewState extends State<AnimeOverview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("List of Popular Anime")),
+      appBar: AppBar(title: const Text("List of Popular Anime")),
       body: GestureDetector(
         child: FutureBuilder<List<Anime>>(
           future: futureAnime,

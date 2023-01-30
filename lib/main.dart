@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Providers/BookmarkProvider.dart';
-import 'package:myanimeapp/Providers/Page/HomePage.dart';
-import 'package:myanimeapp/Providers/screens/AnimeBookmark.dart';
-import './Providers/Models/anime.dart';
+import 'package:myanimeapp/Providers/bookmark_provider.dart';
+import 'package:myanimeapp/Providers/Page/home_page.dart';
+import 'package:myanimeapp/Providers/screens/anime_bookmark.dart';
 import 'package:provider/provider.dart';
-import 'Providers/AnimesProvider.dart';
-import 'Providers/screens/AnimeDetail.dart';
-import 'Providers/screens/AnimeOverview.dart';
+import 'Providers/animes_provider.dart';
+import 'Providers/screens/anime_detail.dart';
 
 void main() {
   runApp(const MyApp());

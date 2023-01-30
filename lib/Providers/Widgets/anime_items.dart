@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Providers/AnimesProvider.dart';
+import 'package:myanimeapp/Providers/animes_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../BookmarkProvider.dart';
-import '../screens/AnimeDetail.dart';
+import '../bookmark_provider.dart';
+import '../screens/anime_detail.dart';
 import '../Models/anime.dart';
 
 class AnimeWidget extends StatelessWidget {

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
-import '../AnimesProvider.dart';
+import '../animes_provider.dart';
 
 class SearchAnimeItem extends StatelessWidget {
   const SearchAnimeItem({super.key});
@@ -47,7 +45,7 @@ class SearchAnimeItem extends StatelessWidget {
                   Stack(children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 49, 73, 92),
+                          backgroundColor: const Color.fromARGB(255, 49, 73, 92),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
                           minimumSize: Size.zero,

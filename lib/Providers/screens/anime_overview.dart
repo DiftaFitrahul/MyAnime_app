@@ -1,17 +1,10 @@
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Providers/AnimesProvider.dart';
-import '../BookmarkProvider.dart';
-import 'package:myanimeapp/Providers/Widgets/AnimeGridView.dart';
-import 'package:myanimeapp/Providers/screens/AnimeBookmark.dart';
+import 'package:myanimeapp/Providers/animes_provider.dart';
+import '../bookmark_provider.dart';
+import 'package:myanimeapp/Providers/Widgets/anime_grid_view.dart';
+import 'package:myanimeapp/Providers/screens/anime_bookmark.dart';
 import 'package:provider/provider.dart';
-import '../Widgets/AnimeItems.dart';
-
-import '../Service/fetchDataAnime.dart';
-import '../Models/anime.dart';
-import '../Widgets/Badge.dart';
+import '../Widgets/badges.dart';
 
 class AnimeOverview extends StatefulWidget {
   const AnimeOverview({Key? key}) : super(key: key);

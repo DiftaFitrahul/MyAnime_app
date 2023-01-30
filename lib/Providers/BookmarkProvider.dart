@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:myanimeapp/Providers/Models/anime.dart';
-import 'package:myanimeapp/Providers/Models/animeBookmark.dart';
 
 class BookMarkProvider with ChangeNotifier {
   List<int> idxBookMark = [];

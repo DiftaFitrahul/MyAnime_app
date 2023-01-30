@@ -20,6 +20,7 @@ class AnimeDetailScreen extends StatelessWidget {
         return animes.animeId == animeId;
       },
     );
+    String genre = anime.genre.map((e) => e['name']).toList().join(', ');
 
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 2, 23, 56),
@@ -68,10 +69,10 @@ class AnimeDetailScreen extends StatelessWidget {
                   )
                 ],
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 12, top: 8),
                 child: Text(
-                  'Action, Adventure, Shounen, Magic, Historical',
+                  genre,
                   style: TextStyle(color: Colors.grey),
                 ),
               ),

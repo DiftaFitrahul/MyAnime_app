@@ -45,7 +45,8 @@ class SearchAnimeItem extends StatelessWidget {
                   Stack(children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 49, 73, 92),
+                          backgroundColor:
+                              const Color.fromARGB(255, 49, 73, 92),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
                           minimumSize: Size.zero,

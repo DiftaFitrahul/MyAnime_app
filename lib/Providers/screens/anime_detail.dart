@@ -169,7 +169,7 @@ class AnimeDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 12, top: 8),
                 child: SingleChildScrollView(
                   child: ReadMoreText(
-                    lorem(paragraphs: 1, words: 100),
+                    anime.synopsis,
                     style: const TextStyle(color: Colors.white70),
                   ),
                 ),
@@ -226,9 +226,6 @@ class AnimeDetailScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 100,
-              )
             ],
           ),
         ));

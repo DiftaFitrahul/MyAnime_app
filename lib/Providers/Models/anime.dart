@@ -6,6 +6,7 @@ class Anime with ChangeNotifier {
   final String animeImg;
   final String releaseDate;
   final String animeURL;
+  final String synopsis;
   bool isFavorite;
   bool isBookmark;
 
@@ -15,15 +16,17 @@ class Anime with ChangeNotifier {
       required this.animeImg,
       required this.releaseDate,
       required this.animeURL,
+      required this.synopsis,
       this.isFavorite = false,
       this.isBookmark = false});
 
   factory Anime.fromJson(Map<String, dynamic> json) {
     return Anime(
         animeId: json['mal_id'].toString(),
-        animeTitle: json['titles'][0]['title'] ?? '',
+        animeTitle: json['title_english'] ?? '',
         animeImg: json['images']['jpg']['large_image_url'] ?? '',
         releaseDate: json['aired']['string'] ?? '',
-        animeURL: json['url'] ?? '');
+        animeURL: json['url'] ?? '',
+        synopsis: json['synopsis'] ?? '');
   }
 }

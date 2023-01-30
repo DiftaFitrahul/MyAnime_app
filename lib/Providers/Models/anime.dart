@@ -24,13 +24,13 @@ class Anime with ChangeNotifier {
 
   factory Anime.fromJson(Map<String, dynamic> json) {
     return Anime(
-        animeId: json['mal_id'].toString(),
-        animeTitle: json['title_english'] ?? '',
-        animeImg: json['images']['jpg']['large_image_url'] ?? '',
-        releaseDate: json['aired']['string'] ?? '',
-        animeURL: json['url'] ?? '',
-        synopsis: json['synopsis'] ?? '',
-        genre: json['genres'] ?? '',
-        );
+      animeId: json['mal_id'].toString(),
+      animeTitle: json['title'] ?? '',
+      animeImg: json['images']['jpg']['large_image_url'] ?? '',
+      releaseDate: json['aired']['string'] ?? '',
+      animeURL: json['url'] ?? '',
+      synopsis: json['synopsis'] ?? '',
+      genre: json['genres'] ?? '',
+    );
   }
 }

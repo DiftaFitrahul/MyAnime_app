@@ -96,6 +96,12 @@ class SearchAnimeItem extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: value.popularNow.length,
                       itemBuilder: ((context, index) {
+                        final genre = value.popularNow[index].genre
+                            .map(
+                              (e) => e['name'],
+                            )
+                            .toList()
+                            .join(', ');
                         return Container(
                           margin: const EdgeInsets.only(right: 20),
                           height: 350,
@@ -124,11 +130,11 @@ class SearchAnimeItem extends StatelessWidget {
                                       color: Colors.white.withOpacity(0.9)),
                                 ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.only(top: 8),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Text(
-                                  'Action, History, Drama, Fantasy, Adventure',
-                                  style: TextStyle(
+                                  genre,
+                                  style: const TextStyle(
                                       fontSize: 14,
                                       overflow: TextOverflow.ellipsis,
                                       color:
@@ -171,6 +177,12 @@ class SearchAnimeItem extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     itemCount: value.winter2022.length,
                     itemBuilder: ((context, index) {
+                      final genre = value.winter2022[index].genre
+                            .map(
+                              (e) => e['name'],
+                            )
+                            .toList()
+                            .join(', ');
                       return Container(
                         height: 150,
                         margin: const EdgeInsets.only(bottom: 17),
@@ -202,12 +214,12 @@ class SearchAnimeItem extends StatelessWidget {
                                           overflow: TextOverflow.visible,
                                           fontSize: 19),
                                     ),
-                                    const Padding(
+                                    Padding(
                                       padding:
-                                          EdgeInsets.only(top: 5, bottom: 5),
+                                          const EdgeInsets.only(top: 5, bottom: 5),
                                       child: Text(
-                                        'Action, Romance, Slice of Life',
-                                        style: TextStyle(
+                                        genre,
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             overflow: TextOverflow.ellipsis,
                                             color: Color.fromARGB(

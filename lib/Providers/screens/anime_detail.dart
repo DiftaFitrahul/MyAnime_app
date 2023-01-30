@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:myanimeapp/Providers/animes_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
@@ -70,10 +69,10 @@ class AnimeDetailScreen extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 12, top: 8),
+                padding: const EdgeInsets.only(left: 12, top: 8),
                 child: Text(
                   genre,
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 ),
               ),
               Padding(

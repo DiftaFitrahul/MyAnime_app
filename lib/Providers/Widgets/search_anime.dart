@@ -105,43 +105,41 @@ class SearchAnimeItem extends StatelessWidget {
                         return Container(
                           margin: const EdgeInsets.only(right: 20),
                           height: 350,
-                          width: 230,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 280,
-                                width: 220,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Image(
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage(
-                                          value.popularNow[index].animeImg)),
+                          width: 220,
+                          child: IntrinsicHeight(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  //flex: 10,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Image(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            value.popularNow[index].animeImg)),
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 12),
-                                child: Text(
-                                  value.popularNow[index].animeTitle,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Colors.white.withOpacity(0.9)),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Text(
+                                    value.popularNow[index].animeTitle,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        overflow: TextOverflow.ellipsis,
+                                        color: Colors.white.withOpacity(0.9)),
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Text(
+                                Text(
                                   genre,
                                   style: const TextStyle(
                                       fontSize: 14,
                                       overflow: TextOverflow.ellipsis,
                                       color:
                                           Color.fromARGB(255, 116, 116, 116)),
-                                ),
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           ),
                         );
                       })),
@@ -178,11 +176,11 @@ class SearchAnimeItem extends StatelessWidget {
                     itemCount: value.winter2022.length,
                     itemBuilder: ((context, index) {
                       final genre = value.winter2022[index].genre
-                            .map(
-                              (e) => e['name'],
-                            )
-                            .toList()
-                            .join(', ');
+                          .map(
+                            (e) => e['name'],
+                          )
+                          .toList()
+                          .join(', ');
                       return Container(
                         height: 150,
                         margin: const EdgeInsets.only(bottom: 17),
@@ -215,8 +213,8 @@ class SearchAnimeItem extends StatelessWidget {
                                           fontSize: 19),
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(top: 5, bottom: 5),
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 5),
                                       child: Text(
                                         genre,
                                         style: const TextStyle(

@@ -192,35 +192,41 @@ class AnimeDetailScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: value.animeSelection.length,
                         itemBuilder: ((context, index) => Container(
-                              width: 140,
+                              //decoration: BoxDecoration(color: Colors.amber),
+                              width: 160,
                               margin: const EdgeInsets.only(right: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 200,
-                                    child: Image(
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage(
-                                          value.animeSelection[index].animeImg),
+                              child: IntrinsicHeight(
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(
+                                      child: Image(
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(value
+                                            .animeSelection[index].animeImg),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    value.animeSelection[index].animeTitle,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    value.animeSelection[index].releaseDate,
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: Text(
+                                        value.animeSelection[index].animeTitle,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        value.animeSelection[index].releaseDate,
+                                        style: const TextStyle(
+                                            color: Colors.grey,
+                                            overflow: TextOverflow.ellipsis),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ))),
                   ),

@@ -116,40 +116,44 @@ class AnimeDetailScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        dataAnime.favoriteStatusinDetailScreen(animeId);
-                      },
-                      style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.symmetric(vertical: 8)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.black)),
-                      child: Consumer<AnimesProvider>(
-                        builder: (context, value, child) => Icon(
-                          value.dataAnimes
-                                  .firstWhere(
-                                      (element) => element.animeId == animeId)
-                                  .isFavorite
-                              ? Icons.favorite_outlined
-                              : Icons.favorite_border_outlined,
-                          color: Colors.red,
-                          size: 31,
+                    Flexible(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          dataAnime.favoriteStatusinDetailScreen(animeId);
+                        },
+                        style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.symmetric(vertical: 8)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.black)),
+                        child: Consumer<AnimesProvider>(
+                          builder: (context, value, child) => Icon(
+                            value.dataAnimes
+                                    .firstWhere(
+                                        (element) => element.animeId == animeId)
+                                    .isFavorite
+                                ? Icons.favorite_outlined
+                                : Icons.favorite_border_outlined,
+                            color: Colors.red,
+                            size: 31,
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(width: 17),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.symmetric(vertical: 8)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.black)),
-                      child: const Icon(
-                        Icons.file_download_outlined,
-                        color: Colors.white,
-                        size: 31,
+                    Flexible(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.symmetric(vertical: 8)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.black)),
+                        child: const Icon(
+                          Icons.file_download_outlined,
+                          color: Colors.white,
+                          size: 31,
+                        ),
                       ),
                     ),
                   ],

@@ -19,9 +19,7 @@ class SearchAnimeItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.77,
+                  Flexible(
                     child: TextField(
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(top: 12),
@@ -55,8 +53,8 @@ class SearchAnimeItem extends StatelessWidget {
                       child: const Icon(Icons.notifications),
                     ),
                     Positioned(
-                      right: 16,
-                      top: 16,
+                      right: 14,
+                      top: 6,
                       child: Container(
                         padding: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(

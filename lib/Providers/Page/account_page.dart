@@ -11,7 +11,13 @@ class AccountPage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          children: const [Icon(Icons.search), Text('Search')],
+          children:  [
+            const Icon(Icons.search), 
+            const Text('Search'),
+            Container(width: 100, height: 100,
+            child: Image(image: NetworkImage("")),
+            )
+            ],
         ),
       ),
     );

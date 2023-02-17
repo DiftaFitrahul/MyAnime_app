@@ -2,11 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/animes_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
+import 'package:video_player/video_player.dart';
 
-class AnimeDetailScreen extends StatelessWidget {
+class AnimeDetailScreen extends StatefulWidget {
   static const routeName = '/Anime-detail';
 
   const AnimeDetailScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AnimeDetailScreen> createState() => _AnimeDetailScreenState();
+}
+
+class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(
+        'https://c-an-ca2.betterstream.cc:2223/hls-playback/ad6c8c5a1545e84de2970bf862297f33ded39416473cf49c6642fac6628e3fd6d7792fa8edc551e621fced895ac921462f36f48ed0d2d18bb48f08f7245ff7ab76dc881ed808df784198df387521aaf3da1b93866ca3e7dfb7108e390c256d167760313c8dbb60263e686ecf18c30e144a3b0a3cc48310f12c86e85df6118fcde1a4441d7cdf738fd1336efcee50e553/index-f2-v1-a1.m3u8')
+      ..initialize().then((_) {
+        setState(() {});
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +49,25 @@ class AnimeDetailScreen extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.41,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(anime.animeImg),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.41,
-                    foregroundDecoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                              Colors.transparent,
-                              Color.fromARGB(255, 2, 23, 56)
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            stops: [0.44, 1.0])),
-                  ),
+                  _controller.value.isInitialized
+                      ? AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          child: VideoPlayer(_controller),
+                        )
+                      : Container(
+                          height: MediaQuery.of(context).size.height * 0.41,
+                        ),
+                  FloatingActionButton(
+                      onPressed: () {
+                        setState(() {
+                          _controller.value.isPlaying
+                              ? _controller.pause()
+                              : _controller.play();
+                        });
+                      },
+                      child: Icon(_controller.value.isPlaying
+                          ? Icons.pause
+                          : Icons.play_arrow)),
                   Positioned(
                     left: 12,
                     bottom: 0,
@@ -240,4 +256,35 @@ class AnimeDetailScreen extends StatelessWidget {
           ),
         ));
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+  }
 }
+
+/*
+Container(
+                    height: MediaQuery.of(context).size.height * 0.41,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(anime.animeImg),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.41,
+                    foregroundDecoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              Colors.transparent,
+                              Color.fromARGB(255, 2, 23, 56)
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            stops: [0.44, 1.0])),
+                  ),
+                  */

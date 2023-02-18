@@ -7,6 +7,7 @@ class Anime with ChangeNotifier {
   final String releaseDate;
   final String animeURL;
   final String synopsis;
+  final String trailer;
   final List genre;
   bool isFavorite;
   bool isBookmark;
@@ -19,6 +20,7 @@ class Anime with ChangeNotifier {
       required this.animeURL,
       required this.synopsis,
       required this.genre,
+      required this.trailer,
       this.isFavorite = false,
       this.isBookmark = false});
 
@@ -31,6 +33,7 @@ class Anime with ChangeNotifier {
       animeURL: json['url'] ?? '',
       synopsis: json['synopsis'] ?? '',
       genre: json['genres'] ?? '',
+      trailer: json['trailer']['embed_url'] ?? '',
     );
   }
 }

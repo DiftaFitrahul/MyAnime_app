@@ -6,6 +6,7 @@ import './Models/anime.dart';
 
 class AnimesProvider with ChangeNotifier {
   Random random = Random();
+
   List<Anime> _dataAnimes = [];
   List<Anime> get dataAnimes => _dataAnimes;
   bool isLoading = false;
@@ -13,9 +14,39 @@ class AnimesProvider with ChangeNotifier {
   List<Anime> popularNow = [];
   List<Anime> winter2022 = [];
 
-  Future<void> getAllAnimes() async {
+  Future<void> firstGetAllAnimes() async {
     isLoading = true;
-    _dataAnimes = await FetchDataAnime.fetchAnime();
+    _dataAnimes = await FetchDataAnime.fetchAnime(1);
+    isLoading = false;
+    animeSelection.addAll([
+      _dataAnimes[1],
+      _dataAnimes[3],
+      _dataAnimes[5],
+      _dataAnimes[7],
+      _dataAnimes[2],
+      _dataAnimes[4]
+    ]);
+    popularNow.addAll([
+      _dataAnimes[11],
+      _dataAnimes[8],
+      _dataAnimes[6],
+      _dataAnimes[13],
+      _dataAnimes[10]
+    ]);
+    winter2022.addAll([
+      _dataAnimes[15],
+      _dataAnimes[16],
+      _dataAnimes[17],
+      _dataAnimes[18],
+      _dataAnimes[19]
+    ]);
+    notifyListeners();
+  }
+
+  Future<void> getAllAnimes(int currentIndex) async {
+    isLoading = true;
+    notifyListeners();
+    _dataAnimes = await FetchDataAnime.fetchAnime(currentIndex);
     isLoading = false;
     animeSelection.addAll([
       _dataAnimes[1],

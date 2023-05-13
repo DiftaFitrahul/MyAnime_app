@@ -41,6 +41,8 @@ dependencies:
   readmore: ^2.2.0
   flutter_lorem: ^2.0.0
   youtube_player_flutter: ^8.1.2
+  number_pagination: ^0.0.3+2
+  number_paginator: ^0.2.3
 
 dev_dependencies:
   flutter_test:

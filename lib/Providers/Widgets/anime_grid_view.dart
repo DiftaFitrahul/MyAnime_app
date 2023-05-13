@@ -4,16 +4,31 @@ import 'package:provider/provider.dart';
 import '../animes_provider.dart';
 import 'anime_items.dart';
 
-class AnimeGridView extends StatelessWidget {
+class AnimeGridView extends StatefulWidget {
   const AnimeGridView({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<AnimeGridView> createState() => _AnimeGridViewState();
+}
+
+class _AnimeGridViewState extends State<AnimeGridView> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final animesData = Provider.of<AnimesProvider>(context);
-    final allAnimes = animesData.dataAnimes;
+    final allAnimes = Provider.of<AnimesProvider>(context).dataAnimes;
     return GridView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        controller: _scrollController,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 10,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/Widgets/NumberPaginator.dart';
+import 'package:number_paginator/number_paginator.dart';
 import 'package:myanimeapp/Providers/animes_provider.dart';
 import '../bookmark_provider.dart';
 import 'package:myanimeapp/Providers/Widgets/anime_grid_view.dart';
@@ -17,11 +19,12 @@ class _AnimeOverviewState extends State<AnimeOverview> {
   @override
   void initState() {
     super.initState();
-    Provider.of<AnimesProvider>(context, listen: false).getAllAnimes();
+    Provider.of<AnimesProvider>(context, listen: false).firstGetAllAnimes();
   }
 
   @override
   Widget build(BuildContext context) {
+    final loadingOverviewPage = Provider.of<AnimesProvider>(context).isLoading;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       appBar: AppBar(
@@ -50,25 +53,21 @@ class _AnimeOverviewState extends State<AnimeOverview> {
           ),
         ],
       ),
-      body: GestureDetector(child: Consumer<AnimesProvider>(
-        builder: (context, value, child) {
-          if (value.isLoading) {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height / 0.8,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-          return const AnimeGridView();
-        },
+      body: GestureDetector(
+          child: SingleChildScrollView(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const NumberPaginatorClass(),
+            loadingOverviewPage
+                ? const Center(child: CircularProgressIndicator())
+                : const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: AnimeGridView(),
+                  ),
+          ],
+        ),
       )),
-      floatingActionButton: FloatingActionButton(
-        foregroundColor: Colors.white,
-        backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.add),
-        onPressed: () {},
-      ),
     );
   }
 }

@@ -31,7 +31,6 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
 
   @override
   void dispose() {
-    print('===========================================');
     _controller.dispose();
     super.dispose();
   }
@@ -163,14 +162,14 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                           child: InkWell(
                             splashColor: Colors.amber.shade400,
                             onTap: () {},
-                            child: Padding(
+                            child: const Padding(
                               padding:
-                                  const EdgeInsets.only(left: 20, right: 10),
+                                  EdgeInsets.only(left: 20, right: 10),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const [
+                                  children: [
                                     Text(
                                       'Play',
                                       style: TextStyle(

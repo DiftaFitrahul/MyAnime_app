@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Providers/Service/fetch_data_search_anime.dart';
 import 'package:myanimeapp/Providers/animes_search_provider.dart';
 import 'package:provider/provider.dart';
 

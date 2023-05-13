@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/Widgets/NumberPaginator.dart';
-import 'package:number_paginator/number_paginator.dart';
 import 'package:myanimeapp/Providers/animes_provider.dart';
 import '../bookmark_provider.dart';
 import 'package:myanimeapp/Providers/Widgets/anime_grid_view.dart';

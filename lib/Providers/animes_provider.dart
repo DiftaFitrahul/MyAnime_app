@@ -44,6 +44,9 @@ class AnimesProvider with ChangeNotifier {
   }
 
   Future<void> getAllAnimes(int currentIndex) async {
+    animeSelection = [];
+    popularNow = [];
+    winter2022 = [];
     isLoading = true;
     notifyListeners();
     _dataAnimes = await FetchDataAnime.fetchAnime(currentIndex);

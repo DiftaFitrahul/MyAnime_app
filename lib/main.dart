@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/animes_search_provider.dart';
 import 'package:myanimeapp/Providers/bookmark_provider.dart';
 import 'package:myanimeapp/Providers/Page/home_page.dart';
 import 'package:myanimeapp/Providers/screens/anime_bookmark.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => AnimesSearchProvider()),
         ChangeNotifierProvider(create: (context) => AnimesProvider()),
         ChangeNotifierProvider(create: (context) => BookMarkProvider()),
       ],

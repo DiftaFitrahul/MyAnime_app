@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/Service/fetch_data_search_anime.dart';
+import 'package:myanimeapp/Providers/animes_search_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../Models/anime.dart';
 import '../animes_provider.dart';
 
 class SearchAnimeItem extends StatefulWidget {
@@ -13,17 +14,11 @@ class SearchAnimeItem extends StatefulWidget {
 
 class _SearchAnimeItemState extends State<SearchAnimeItem> {
   String data = '';
-  List<Anime> searchAnimeList = [];
-  void updateList(String search) {
-    searchAnimeList = Provider.of<AnimesProvider>(context, listen: false)
-        .dataAnimes
-        .where((anime) =>
-            anime.animeTitle.toLowerCase().contains(search.toLowerCase()))
-        .toList();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final searchAnimeList =
+        Provider.of<AnimesSearchProvider>(context).animesSearch;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       body: SingleChildScrollView(
@@ -54,7 +49,9 @@ class _SearchAnimeItemState extends State<SearchAnimeItem> {
                       onChanged: (value) {
                         setState(() {
                           data = value;
-                          updateList(value);
+                          Provider.of<AnimesSearchProvider>(context,
+                                  listen: false)
+                              .updateSearchAnimeList(data);
                         });
                       },
                     ),

@@ -32,7 +32,7 @@ class _AnimeOverviewState extends State<AnimeOverview> {
           Consumer<BookMarkProvider>(
             builder: (context, value, icon) {
               return Badges(
-                value: value.idxBookMark.length.toString(),
+                value: value.animeBookmark.length.toString(),
                 child: icon ??
                     IconButton(
                       icon: const Icon(Icons.bookmarks_outlined),

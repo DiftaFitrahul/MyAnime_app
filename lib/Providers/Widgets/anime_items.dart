@@ -13,19 +13,20 @@ class AnimeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final animeData = Provider.of<Anime>(context, listen: false);
-    final animeBookmark = Provider.of<BookMarkProvider>(context, listen: false);
+    final bookmarkResult =
+        Provider.of<BookMarkProvider>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           // Consumer is always listen
-          leading: Consumer<AnimesProvider>(
-            builder: (context, value, child) => IconButton(
+          leading: Consumer2<AnimesProvider, BookMarkProvider>(
+            builder: (context, anime, bookmark, child) => IconButton(
               onPressed: () {
-                value.favoriteStatus(idx);
+                anime.favoriteStatus(idx);
               },
-              icon: (value.dataAnimes[idx].isFavorite)
+              icon: (anime.dataAnimes[idx].isFavorite)
                   ? const Icon(Icons.favorite)
                   : const Icon(Icons.favorite_border),
               color: Colors.amber,
@@ -45,26 +46,30 @@ class AnimeWidget extends StatelessWidget {
             ),
           ),
           //so we get data in animes provider and change the status in animes provider
-          trailing: Consumer<AnimesProvider>(
-            builder: (context, value, child) => IconButton(
+          trailing: Consumer2<AnimesProvider, BookMarkProvider>(
+            builder: (context, anime, bookmark, child) => IconButton(
                 onPressed: (() {
-                  value.bmStatus(idx);
+                  anime.bmStatus(idx);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: (value.dataAnimes[idx].isBookmark == false)
+                    content: (anime.dataAnimes[idx].isBookmark == false)
                         ? const Text("succesfully removed")
                         : const Text("succesfully added"),
                     duration: const Duration(milliseconds: 600),
                   ));
-                  if (animeBookmark.idxBookMark.contains(idx)) {
-                    animeBookmark.removeIdxBookmark(idx);
+                  if (bookmarkResult.animeIdBookmark
+                      .contains(anime.dataAnimes[idx].animeId)) {
+                    bookmarkResult.removeBookmark(anime.dataAnimes[idx]);
                   } else {
-                    animeBookmark.addIdxBookmark(idx);
+                    bookmarkResult
+                        .addIdxBookmark(anime.dataAnimes[idx].animeId);
+                    bookmarkResult.getBookmarkAnime();
                   }
                 }),
                 color: Colors.amber,
-                icon: (value.dataAnimes[idx].isBookmark == false)
-                    ? const Icon(Icons.bookmark_border)
-                    : const Icon(Icons.bookmark)),
+                icon: (bookmark.animeIdBookmark
+                        .contains(anime.dataAnimes[idx].animeId))
+                    ? const Icon(Icons.bookmark)
+                    : const Icon(Icons.bookmark_border)),
           ),
         ),
         child: GestureDetector(

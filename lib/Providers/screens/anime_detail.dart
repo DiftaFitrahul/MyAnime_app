@@ -19,6 +19,12 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
 
   late YoutubePlayerController _controller;
 
+  @override
+  void initState() {
+    _controller = YoutubePlayerController(initialVideoId: '');
+    super.initState();
+  }
+
   void initPlayer(String youtubeUrl) {
     final videoId = YoutubePlayer.convertUrlToId(youtubeUrl) ?? '';
 

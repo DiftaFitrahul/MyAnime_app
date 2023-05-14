@@ -1,6 +1,7 @@
 import "dart:math";
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/Service/fetch_data_anime_by_id.dart';
 import 'Service/fetch_data_anime.dart';
 import './Models/anime.dart';
 
@@ -13,6 +14,10 @@ class AnimesProvider with ChangeNotifier {
   List<Anime> animeSelection = [];
   List<Anime> popularNow = [];
   List<Anime> winter2022 = [];
+
+  void addAnimeFromBookmark(Anime anime) {
+    _dataAnimes.add(anime);
+  }
 
   Future<void> firstGetAllAnimes() async {
     isLoading = true;

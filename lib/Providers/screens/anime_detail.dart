@@ -37,7 +37,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final animeId = ModalRoute.of(context)?.settings.arguments as String;
+    final animeId = ModalRoute.of(context)?.settings.arguments;
     final dataAnime = Provider.of<AnimesProvider>(context, listen: false);
     final anime = Provider.of<AnimesProvider>(context, listen: false)
         .dataAnimes
@@ -163,8 +163,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                             splashColor: Colors.amber.shade400,
                             onTap: () {},
                             child: const Padding(
-                              padding:
-                                  EdgeInsets.only(left: 20, right: 10),
+                              padding: EdgeInsets.only(left: 20, right: 10),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,

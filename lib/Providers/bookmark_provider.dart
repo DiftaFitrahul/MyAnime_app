@@ -28,8 +28,4 @@ class BookMarkProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeAtIdxBookmark(int idx) {
-    animeIdBookmark.removeAt(idx);
-    notifyListeners();
-  }
 }

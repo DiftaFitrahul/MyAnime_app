@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/Models/collection_type.dart';
 import 'package:myanimeapp/Providers/animes_provider.dart';
+import 'package:myanimeapp/Providers/animes_search_provider.dart';
 import 'package:myanimeapp/Providers/bookmark_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
@@ -71,8 +72,8 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
         );
         break;
       case AnimeCollection.search:
-        anime = Provider.of<AnimesProvider>(context, listen: false)
-            .dataAnimes
+        anime = Provider.of<AnimesSearchProvider>(context, listen: false)
+            .animesSearch
             .firstWhere(
           (animes) {
             return animes.animeId == collectionType.id;
@@ -232,8 +233,10 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                                   const EdgeInsets.symmetric(vertical: 8)),
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.black)),
-                          child: Consumer2<AnimesProvider, BookMarkProvider>(
-                              builder: (context, animes, bookmars, child) {
+                          child: Consumer3<AnimesProvider, BookMarkProvider,
+                                  AnimesSearchProvider>(
+                              builder:
+                                  (context, animes, bookmars, search, child) {
                             switch (collectionType.type) {
                               case AnimeCollection.home:
                                 return getIconAnime(
@@ -243,7 +246,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                                     bookmars.animeBookmark, collectionType.id);
                               case AnimeCollection.search:
                                 return getIconAnime(
-                                    animes.dataAnimes, collectionType.id);
+                                    search.animesSearch, collectionType.id);
                             }
                           }),
                         ),

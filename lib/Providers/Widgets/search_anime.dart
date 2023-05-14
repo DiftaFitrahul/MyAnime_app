@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/animes_search_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../Models/collection_type.dart';
 import '../animes_provider.dart';
+import '../screens/anime_detail.dart';
 
 class SearchAnimeItem extends StatefulWidget {
   const SearchAnimeItem({super.key});
@@ -18,6 +20,8 @@ class _SearchAnimeItemState extends State<SearchAnimeItem> {
   Widget build(BuildContext context) {
     final searchAnimeList =
         Provider.of<AnimesSearchProvider>(context).animesSearch;
+    final isLoadingSearch =
+        Provider.of<AnimesSearchProvider>(context).isLoadingSearch;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       body: SingleChildScrollView(
@@ -125,7 +129,6 @@ class _SearchAnimeItemState extends State<SearchAnimeItem> {
                                               .toList()
                                               .join(', ');
                                       return GestureDetector(
-                                        
                                         child: Container(
                                           margin:
                                               const EdgeInsets.only(right: 20),
@@ -140,24 +143,28 @@ class _SearchAnimeItemState extends State<SearchAnimeItem> {
                                                   //flex: 10,
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius.circular(15),
+                                                        BorderRadius.circular(
+                                                            15),
                                                     child: Image(
                                                         fit: BoxFit.cover,
-                                                        image: NetworkImage(value
-                                                            .popularNow[index]
-                                                            .animeImg)),
+                                                        image: NetworkImage(
+                                                            value
+                                                                .popularNow[
+                                                                    index]
+                                                                .animeImg)),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 10),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 10),
                                                   child: Text(
                                                     value.popularNow[index]
                                                         .animeTitle,
                                                     style: TextStyle(
                                                         fontSize: 20,
-                                                        overflow:
-                                                            TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         color: Colors.white
                                                             .withOpacity(0.9)),
                                                   ),
@@ -297,93 +304,111 @@ class _SearchAnimeItemState extends State<SearchAnimeItem> {
                       )
                     ],
                   )
-                : Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.zero,
-                        itemCount: searchAnimeList.length,
-                        itemBuilder: ((context, index) {
-                          final genre = searchAnimeList[index]
-                              .genre
-                              .map(
-                                (e) => e['name'],
-                              )
-                              .toList()
-                              .join(', ');
-                          return Container(
-                            height: 150,
-                            margin: const EdgeInsets.only(bottom: 17),
-                            child: Row(
-                              children: [
-                                SizedBox(
+                : isLoadingSearch
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.zero,
+                            itemCount: searchAnimeList.length,
+                            itemBuilder: ((context, index) {
+                              final genre = searchAnimeList[index]
+                                  .genre
+                                  .map(
+                                    (e) => e['name'],
+                                  )
+                                  .toList()
+                                  .join(', ');
+                              return GestureDetector(
+                                onTap: () => Navigator.of(context).pushNamed(
+                                    AnimeDetailScreen.routeName,
+                                    arguments: CollectionAnimeType(
+                                        type: AnimeCollection.search,
+                                        id: searchAnimeList[index].animeId)),
+                                child: Container(
                                   height: 150,
-                                  width: 110,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(13),
-                                    child: Image(
-                                        fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            searchAnimeList[index].animeImg)),
-                                  ),
-                                ),
-                                Flexible(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 20),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          searchAnimeList[index].animeTitle,
-                                          style: TextStyle(
-                                              color:
-                                                  Colors.white.withOpacity(0.9),
-                                              fontWeight: FontWeight.w500,
-                                              overflow: TextOverflow.visible,
-                                              fontSize: 19),
+                                  margin: const EdgeInsets.only(bottom: 17),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 150,
+                                        width: 110,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(13),
+                                          child: Image(
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(
+                                                  searchAnimeList[index]
+                                                      .animeImg)),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 5, bottom: 5),
-                                          child: Text(
-                                            genre,
-                                            style: const TextStyle(
-                                                fontSize: 15,
-                                                overflow: TextOverflow.ellipsis,
-                                                color: Color.fromARGB(
-                                                    255, 116, 116, 116)),
+                                      ),
+                                      Flexible(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 20),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                searchAnimeList[index]
+                                                    .animeTitle,
+                                                style: TextStyle(
+                                                    color: Colors.white
+                                                        .withOpacity(0.9),
+                                                    fontWeight: FontWeight.w500,
+                                                    overflow:
+                                                        TextOverflow.visible,
+                                                    fontSize: 19),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5, bottom: 5),
+                                                child: Text(
+                                                  genre,
+                                                  style: const TextStyle(
+                                                      fontSize: 15,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      color: Color.fromARGB(
+                                                          255, 116, 116, 116)),
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.star_rate,
+                                                    color: Colors.yellow,
+                                                    size: 17,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    '8.33',
+                                                    style: TextStyle(
+                                                        color:
+                                                            Colors.grey[400]),
+                                                  )
+                                                ],
+                                              )
+                                            ],
                                           ),
                                         ),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.star_rate,
-                                              color: Colors.yellow,
-                                              size: 17,
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              '8.33',
-                                              style: TextStyle(
-                                                  color: Colors.grey[400]),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                          );
-                        })),
-                  ),
+                                ),
+                              );
+                            })),
+                      ),
           ],
         ),
       ),

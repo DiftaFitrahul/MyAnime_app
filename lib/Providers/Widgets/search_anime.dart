@@ -124,52 +124,55 @@ class _SearchAnimeItemState extends State<SearchAnimeItem> {
                                               )
                                               .toList()
                                               .join(', ');
-                                      return Container(
-                                        margin:
-                                            const EdgeInsets.only(right: 20),
-                                        height: 350,
-                                        width: 220,
-                                        child: IntrinsicHeight(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: [
-                                              Expanded(
-                                                //flex: 10,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                  child: Image(
-                                                      fit: BoxFit.cover,
-                                                      image: NetworkImage(value
-                                                          .popularNow[index]
-                                                          .animeImg)),
+                                      return GestureDetector(
+                                        
+                                        child: Container(
+                                          margin:
+                                              const EdgeInsets.only(right: 20),
+                                          height: 350,
+                                          width: 220,
+                                          child: IntrinsicHeight(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Expanded(
+                                                  //flex: 10,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(15),
+                                                    child: Image(
+                                                        fit: BoxFit.cover,
+                                                        image: NetworkImage(value
+                                                            .popularNow[index]
+                                                            .animeImg)),
+                                                  ),
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10),
-                                                child: Text(
-                                                  value.popularNow[index]
-                                                      .animeTitle,
-                                                  style: TextStyle(
-                                                      fontSize: 20,
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      top: 10),
+                                                  child: Text(
+                                                    value.popularNow[index]
+                                                        .animeTitle,
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        overflow:
+                                                            TextOverflow.ellipsis,
+                                                        color: Colors.white
+                                                            .withOpacity(0.9)),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  genre,
+                                                  style: const TextStyle(
+                                                      fontSize: 14,
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                      color: Colors.white
-                                                          .withOpacity(0.9)),
-                                                ),
-                                              ),
-                                              Text(
-                                                genre,
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    color: Color.fromARGB(
-                                                        255, 116, 116, 116)),
-                                              )
-                                            ],
+                                                      color: Color.fromARGB(
+                                                          255, 116, 116, 116)),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       );

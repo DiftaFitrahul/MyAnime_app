@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/animes_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../Models/collection_type.dart';
 import '../bookmark_provider.dart';
 import '../screens/anime_detail.dart';
 import '../Models/anime.dart';
@@ -75,7 +76,7 @@ class AnimeWidget extends StatelessWidget {
         child: GestureDetector(
           onTap: (() {
             Navigator.of(context).pushNamed(AnimeDetailScreen.routeName,
-                arguments: animeData.animeId);
+                arguments: CollectionAnimeType(type: AnimeCollection.home, id: animeData.animeId));
           }),
           child: Image.network(
             animeData.animeImg,

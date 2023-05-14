@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/Models/collection_type.dart';
 import 'package:myanimeapp/Providers/animes_provider.dart';
+import 'package:myanimeapp/Providers/bookmark_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import '../Models/anime.dart';
 
 class AnimeDetailScreen extends StatefulWidget {
   static const routeName = '/Anime-detail';
@@ -43,15 +47,40 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final animeId = ModalRoute.of(context)?.settings.arguments;
+    final collectionType =
+        ModalRoute.of(context)?.settings.arguments as CollectionAnimeType;
     final dataAnime = Provider.of<AnimesProvider>(context, listen: false);
-    final anime = Provider.of<AnimesProvider>(context, listen: false)
-        .dataAnimes
-        .firstWhere(
-      (animes) {
-        return animes.animeId == animeId;
-      },
-    );
+    late Anime anime;
+    switch (collectionType.type) {
+      case AnimeCollection.home:
+        anime = Provider.of<AnimesProvider>(context, listen: false)
+            .dataAnimes
+            .firstWhere(
+          (animes) {
+            return animes.animeId == collectionType.id;
+          },
+        );
+        break;
+      case AnimeCollection.bookmark:
+        anime = Provider.of<BookMarkProvider>(context, listen: false)
+            .animeBookmark
+            .firstWhere(
+          (animes) {
+            return animes.animeId == collectionType.id;
+          },
+        );
+        break;
+      case AnimeCollection.search:
+        anime = Provider.of<AnimesProvider>(context, listen: false)
+            .dataAnimes
+            .firstWhere(
+          (animes) {
+            return animes.animeId == collectionType.id;
+          },
+        );
+        break;
+    }
+
     String genre = anime.genre.map((e) => e['name']).toList().join(', ');
 
     return WillPopScope(
@@ -195,25 +224,28 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                       Flexible(
                         child: ElevatedButton(
                           onPressed: () {
-                            dataAnime.favoriteStatusinDetailScreen(animeId);
+                            dataAnime.favoriteStatusinDetailScreen(
+                                collectionType.id);
                           },
                           style: ButtonStyle(
                               padding: MaterialStateProperty.all(
                                   const EdgeInsets.symmetric(vertical: 8)),
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.black)),
-                          child: Consumer<AnimesProvider>(
-                            builder: (context, value, child) => Icon(
-                              value.dataAnimes
-                                      .firstWhere((element) =>
-                                          element.animeId == animeId)
-                                      .isFavorite
-                                  ? Icons.favorite_outlined
-                                  : Icons.favorite_border_outlined,
-                              color: Colors.red,
-                              size: 31,
-                            ),
-                          ),
+                          child: Consumer2<AnimesProvider, BookMarkProvider>(
+                              builder: (context, animes, bookmars, child) {
+                            switch (collectionType.type) {
+                              case AnimeCollection.home:
+                                return getIconAnime(
+                                    animes.dataAnimes, collectionType.id);
+                              case AnimeCollection.bookmark:
+                                return getIconAnime(
+                                    bookmars.animeBookmark, collectionType.id);
+                              case AnimeCollection.search:
+                                return getIconAnime(
+                                    animes.dataAnimes, collectionType.id);
+                            }
+                          }),
                         ),
                       ),
                       const SizedBox(width: 17),
@@ -319,6 +351,16 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
               ],
             ),
           )),
+    );
+  }
+
+  Icon getIconAnime(List anime, int id) {
+    return Icon(
+      anime.firstWhere((element) => element.animeId == id).isFavorite
+          ? Icons.favorite_outlined
+          : Icons.favorite_border_outlined,
+      color: Colors.red,
+      size: 31,
     );
   }
 }

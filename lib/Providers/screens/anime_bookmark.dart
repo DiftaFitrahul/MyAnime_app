@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/Models/collection_type.dart';
 
 import 'package:provider/provider.dart';
 
-import '../animes_provider.dart';
 import '../bookmark_provider.dart';
 import './anime_detail.dart';
 
@@ -12,7 +12,6 @@ class BookmarkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final animesProvider = Provider.of<AnimesProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       appBar: AppBar(title: const Text("Animes Bookmark")),
@@ -36,17 +35,12 @@ class BookmarkScreen extends StatelessWidget {
                               .join(', ');
                           return GestureDetector(
                             behavior: HitTestBehavior.opaque,
-                            onTap: () async {
-                              animesProvider.addAnimeFromBookmark(
-                                  value.animeBookmark[index]);
-                              await Future.delayed(
-                                      const Duration(milliseconds: 100))
-                                  .then((_) {
-                                Navigator.of(context).pushNamed(
-                                    AnimeDetailScreen.routeName,
-                                    arguments:
-                                        value.animeBookmark[index].animeId);
-                              });
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                  AnimeDetailScreen.routeName,
+                                  arguments: CollectionAnimeType(
+                                      type: AnimeCollection.bookmark,
+                                      id: value.animeBookmark[index].animeId));
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

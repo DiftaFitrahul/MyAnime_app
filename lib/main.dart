@@ -1,13 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/animes_search_provider.dart';
 import 'package:myanimeapp/Providers/bookmark_provider.dart';
 import 'package:myanimeapp/Providers/Page/home_page.dart';
 import 'package:myanimeapp/Providers/screens/anime_bookmark.dart';
+import 'package:myanimeapp/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'Providers/animes_provider.dart';
 import 'Providers/screens/anime_detail.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 

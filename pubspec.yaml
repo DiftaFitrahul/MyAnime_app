@@ -43,7 +43,8 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   number_pagination: ^0.0.3+2
   number_paginator: ^0.2.3
-  firebase: ^9.0.3
+  firebase_core: ^2.13.0
+  cloud_firestore: ^4.7.1
 
 dev_dependencies:
   flutter_test:

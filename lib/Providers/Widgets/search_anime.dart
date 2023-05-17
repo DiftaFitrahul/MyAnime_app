@@ -129,6 +129,14 @@ class _SearchAnimeItemState extends State<SearchAnimeItem> {
                                               .toList()
                                               .join(', ');
                                       return GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).pushNamed(
+                                              AnimeDetailScreen.routeName,
+                                              arguments: CollectionAnimeType(
+                                                  type: AnimeCollection.home,
+                                                  id: value.popularNow[index]
+                                                      .animeId));
+                                        },
                                         child: Container(
                                           margin:
                                               const EdgeInsets.only(right: 20),
@@ -223,80 +231,97 @@ class _SearchAnimeItemState extends State<SearchAnimeItem> {
                                     )
                                     .toList()
                                     .join(', ');
-                                return Container(
-                                  height: 150,
-                                  margin: const EdgeInsets.only(bottom: 17),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        height: 150,
-                                        width: 110,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(13),
-                                          child: Image(
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(value
-                                                  .winter2022[index].animeImg)),
-                                        ),
-                                      ),
-                                      Flexible(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 20),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                value.winter2022[index]
-                                                    .animeTitle,
-                                                style: TextStyle(
-                                                    color: Colors.white
-                                                        .withOpacity(0.9),
-                                                    fontWeight: FontWeight.w500,
-                                                    overflow:
-                                                        TextOverflow.visible,
-                                                    fontSize: 19),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 5, bottom: 5),
-                                                child: Text(
-                                                  genre,
-                                                  style: const TextStyle(
-                                                      fontSize: 15,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      color: Color.fromARGB(
-                                                          255, 116, 116, 116)),
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.star_rate,
-                                                    color: Colors.yellow,
-                                                    size: 17,
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    '8.33',
-                                                    style: TextStyle(
-                                                        color:
-                                                            Colors.grey[400]),
-                                                  )
-                                                ],
-                                              )
-                                            ],
+                                return GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed(
+                                        AnimeDetailScreen.routeName,
+                                        arguments: CollectionAnimeType(
+                                            type: AnimeCollection.home,
+                                            id: value
+                                                .winter2022[index].animeId));
+                                  },
+                                  child: Container(
+                                    height: 150,
+                                    margin: const EdgeInsets.only(bottom: 17),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 150,
+                                          width: 110,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(13),
+                                            child: Image(
+                                                fit: BoxFit.fill,
+                                                image: NetworkImage(value
+                                                    .winter2022[index]
+                                                    .animeImg)),
                                           ),
                                         ),
-                                      )
-                                    ],
+                                        Flexible(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  value.winter2022[index]
+                                                      .animeTitle,
+                                                  style: TextStyle(
+                                                      color: Colors.white
+                                                          .withOpacity(0.9),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      overflow:
+                                                          TextOverflow.visible,
+                                                      fontSize: 19),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5, bottom: 5),
+                                                  child: Text(
+                                                    genre,
+                                                    style: const TextStyle(
+                                                        fontSize: 15,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            116,
+                                                            116,
+                                                            116)),
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.star_rate,
+                                                      color: Colors.yellow,
+                                                      size: 17,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      '8.33',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[400]),
+                                                    )
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 );
                               })),

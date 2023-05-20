@@ -7,9 +7,9 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Search Page'),),
-      body: Center(
+      body: const Center(
         child: Column(
-          children: const [
+          children: [
             Icon(Icons.search),
             Text('Search')
           ],

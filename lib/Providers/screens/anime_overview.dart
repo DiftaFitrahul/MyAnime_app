@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myanimeapp/Providers/Widgets/NumberPaginator.dart';
 import 'package:myanimeapp/Providers/animes_provider.dart';
+import '../../components/animations/lottie_overlay.dart';
 import '../bookmark_provider.dart';
 import 'package:myanimeapp/Providers/Widgets/anime_grid_view.dart';
 import 'package:myanimeapp/Providers/screens/anime_bookmark.dart';
@@ -23,7 +25,16 @@ class _AnimeOverviewState extends State<AnimeOverview> {
 
   @override
   Widget build(BuildContext context) {
-    final loadingOverviewPage = Provider.of<AnimesProvider>(context).isLoading;
+    final loadingOverview = Provider.of<AnimesProvider>(context).isLoading;
+    if (loadingOverview) {
+      Future.delayed(const Duration(milliseconds: 100)).then((value) {
+        LottieOverlay.instance().show(context: context);
+      });
+    } else {
+      Future.delayed(const Duration(seconds: 1)).then((value) {
+        LottieOverlay.instance().hide(context: context);
+      });
+    }
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       appBar: AppBar(
@@ -53,17 +64,15 @@ class _AnimeOverviewState extends State<AnimeOverview> {
         ],
       ),
       body: GestureDetector(
-          child: SingleChildScrollView(
-        padding: const EdgeInsets.all(8.0),
+          child: const SingleChildScrollView(
+        padding: EdgeInsets.all(8.0),
         child: Column(
           children: [
-            const NumberPaginatorClass(),
-            loadingOverviewPage
-                ? const Center(child: CircularProgressIndicator())
-                : const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: AnimeGridView(),
-                  ),
+            NumberPaginatorClass(),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: AnimeGridView(),
+            ),
           ],
         ),
       )),

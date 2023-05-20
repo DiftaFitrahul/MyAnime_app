@@ -14,7 +14,6 @@ class AnimesProvider with ChangeNotifier {
   List<Anime> popularNow = [];
   List<Anime> winter2022 = [];
 
-
   Future<void> firstGetAllAnimes() async {
     isLoading = true;
     _dataAnimes = await FetchDataAnime.fetchAnime(1);
@@ -51,6 +50,7 @@ class AnimesProvider with ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _dataAnimes = await FetchDataAnime.fetchAnime(currentIndex);
+    await Future.delayed(const Duration(seconds: 2));
     isLoading = false;
     animeSelection.addAll([
       _dataAnimes[1],

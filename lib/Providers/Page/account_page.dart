@@ -25,14 +25,14 @@ class AccountPage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: const Text(
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
                 'dIFTA',
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
                 'difta.fit2002@mail.ugn.ac.id',

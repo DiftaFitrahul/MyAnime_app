@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/components/animations/lottie_overlay.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ class NumberPaginatorClass extends StatefulWidget {
 class _NumberPaginatorState extends State<NumberPaginatorClass> {
   @override
   Widget build(BuildContext context) {
+    
     return NumberPaginator(
       numberPages: 20,
       config: const NumberPaginatorUIConfig(
@@ -25,6 +27,7 @@ class _NumberPaginatorState extends State<NumberPaginatorClass> {
         setState(() {});
         Provider.of<AnimesProvider>(context, listen: false)
             .getAllAnimes(p0 + 1);
+       
       },
     );
   }

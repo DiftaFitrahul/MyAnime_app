@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:myanimeapp/Providers/Widgets/NumberPaginator.dart';
 import 'package:myanimeapp/Providers/animes_provider.dart';
 import '../../components/animations/lottie_overlay.dart';

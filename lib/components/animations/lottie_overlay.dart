@@ -12,7 +12,7 @@ class LottieOverlay {
     return showDialog(
         context: context,
         builder: (context) {
-          return Lottie.asset('assets/lottie/loading_lottie.json',
+          return Lottie.asset('assets/lottie/loading_2.json',
               repeat: true, reverse: true);
         });
   }

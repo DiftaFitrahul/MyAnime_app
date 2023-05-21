@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/Page/login_page.dart';
 import 'package:myanimeapp/Providers/animes_search_provider.dart';
 import 'package:myanimeapp/Providers/bookmark_provider.dart';
 import 'package:myanimeapp/Providers/Page/home_page.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.indigo)
               .copyWith(secondary: Colors.amber),
         ),
-        home: const HomePage(),
+        home: const LoginPage(),
         routes: {
           AnimeDetailScreen.routeName: (context) => const AnimeDetailScreen(),
           BookmarkScreen.routeName: (context) => const BookmarkScreen()

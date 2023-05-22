@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:myanimeapp/Providers/animes_provider.dart';
-import 'package:provider/provider.dart';
 
 class LottieOverlay {
   LottieOverlay._sharedInstance();

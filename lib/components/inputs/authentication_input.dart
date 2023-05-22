@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AuthenticationInput extends StatefulWidget {
+  final TextEditingController inputController;
+  final IconData inputIcon;
+  final String hintText;
+  final bool obsecured;
   const AuthenticationInput({
     super.key,
-
-    // required this.inputController,
-    // required this.inputIcon,
-    // required this.hintText,
-    // this.obsecured = false,
+    required this.inputController,
+    required this.inputIcon,
+    required this.hintText,
+    this.obsecured = false,
   });
 
   @override
@@ -41,7 +44,7 @@ class _AuthenticationInputState extends State<AuthenticationInput> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
       child: Container(
         padding: const EdgeInsets.only(
           top: 15,
@@ -51,21 +54,21 @@ class _AuthenticationInputState extends State<AuthenticationInput> {
             color: _colorContainer, borderRadius: BorderRadius.circular(20)),
         child: TextFormField(
           focusNode: _focusnode,
-          controller: inputController,
-          obscureText: false,
+          controller: widget.inputController,
+          obscureText: widget.obsecured,
           style: const TextStyle(
               fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15),
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
               enabledBorder: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 5),
-              border: OutlineInputBorder(
+              contentPadding: const EdgeInsets.only(top: 5),
+              border: const OutlineInputBorder(
                 borderSide: BorderSide.none,
               ),
-              labelText: 'EMAIL',
-              labelStyle: TextStyle(color: Colors.white70, fontSize: 11),
+              labelText: widget.hintText,
+              labelStyle: const TextStyle(color: Colors.white70, fontSize: 11),
               floatingLabelBehavior: FloatingLabelBehavior.auto,
               prefixIcon: Icon(
-                Icons.email_outlined,
+                widget.inputIcon,
                 color: Colors.white,
               )),
         ),

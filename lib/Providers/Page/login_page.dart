@@ -17,6 +17,14 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    _key.currentState!.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
@@ -44,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                       inputController: _passwordController,
                       inputIcon: Icons.lock,
                       hintText: 'PASSWORD',
+                      obsecured: true,
                     ),
                     const SizedBox(
                       height: 60,
@@ -54,8 +63,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: const Text(
+                      child: Text(
                         'Forgot Password?',
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.amber.withOpacity(0.8),
+                            fontWeight: FontWeight.w300),
                       ),
                     ),
                     const Spacer(),
@@ -64,8 +77,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: RichText(
                           text: TextSpan(children: [
                         const TextSpan(
-                          text: "Don't have an account? ",
-                        ),
+                            text: "Don't have an account? ",
+                            style: TextStyle(color: Colors.white54)),
                         TextSpan(
                             text: "Sign Up",
                             style: const TextStyle(

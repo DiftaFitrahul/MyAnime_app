@@ -46,6 +46,7 @@ dependencies:
   firebase_core: ^2.13.0
   cloud_firestore: ^4.7.1
   lottie: ^2.3.2
+  firebase_auth: ^4.6.1
 
 dev_dependencies:
   flutter_test:
@@ -74,7 +75,7 @@ flutter:
     - assets/lottie/loading_lottie.json
     - assets/lottie/loading_2.json
     - assets/lottie/japan.json
-  #   - images/a_dot_ham.jpeg
+    - assets/lottie/email.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

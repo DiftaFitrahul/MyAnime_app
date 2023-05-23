@@ -5,11 +5,13 @@ class AuthenticationInput extends StatefulWidget {
   final IconData inputIcon;
   final String hintText;
   final bool obsecured;
+  final String? Function(String?)? validatorInput;
   const AuthenticationInput({
     super.key,
     required this.inputController,
     required this.inputIcon,
     required this.hintText,
+    required this.validatorInput,
     this.obsecured = false,
   });
 
@@ -44,11 +46,12 @@ class _AuthenticationInputState extends State<AuthenticationInput> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3),
       child: Container(
         padding: const EdgeInsets.only(
           top: 15,
           left: 5,
+          bottom: 10,
         ),
         decoration: BoxDecoration(
             color: _colorContainer, borderRadius: BorderRadius.circular(20)),
@@ -59,18 +62,24 @@ class _AuthenticationInputState extends State<AuthenticationInput> {
           style: const TextStyle(
               fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15),
           decoration: InputDecoration(
-              enabledBorder: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 5),
-              border: const OutlineInputBorder(
-                borderSide: BorderSide.none,
-              ),
-              labelText: widget.hintText,
-              labelStyle: const TextStyle(color: Colors.white70, fontSize: 11),
-              floatingLabelBehavior: FloatingLabelBehavior.auto,
-              prefixIcon: Icon(
-                widget.inputIcon,
-                color: Colors.white,
-              )),
+            enabledBorder: InputBorder.none,
+            contentPadding: const EdgeInsets.only(
+              top: 5,
+              left: 40,
+            ),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide.none,
+            ),
+            labelText: widget.hintText,
+            labelStyle: const TextStyle(color: Colors.white70, fontSize: 11),
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
+            prefixIcon: Icon(
+              widget.inputIcon,
+              color: Colors.white,
+            ),
+            errorStyle: const TextStyle(fontSize: 10, height: 0.1),
+          ),
+          validator: widget.validatorInput,
         ),
       ),
     );

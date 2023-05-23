@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/Page/login_page.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
 import 'package:myanimeapp/components/inputs/authentication_input.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
@@ -26,7 +27,6 @@ class _RegisterPageState extends State<RegisterPage> {
     _emailController.dispose();
     _passwordController.dispose();
     _passwordConfirmController.dispose();
-    _key.currentState!.dispose();
     super.dispose();
   }
 
@@ -50,7 +50,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: Align(
                         alignment: Alignment.bottomLeft,
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () => Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage())),
                             icon: const Icon(
                               Icons.arrow_back_ios_new,
                               color: Colors.white,
@@ -110,7 +113,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.amber),
-                            recognizer: TapGestureRecognizer()..onTap = () {})
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  )))
                       ])),
                     )
                   ],

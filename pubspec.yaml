@@ -73,7 +73,7 @@ flutter:
   assets:
     - assets/lottie/loading_lottie.json
     - assets/lottie/loading_2.json
-
+    - assets/lottie/japan.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/Page/register_page.dart';
+import 'package:myanimeapp/components/animations/lottie_animation.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
 import 'package:myanimeapp/components/inputs/authentication_input.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
@@ -18,7 +20,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _key.currentState!.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -39,6 +40,13 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
+                    const Padding(
+                      padding: EdgeInsets.only(
+                        top: 60,
+                      ),
+                      child: LottieAnimation(
+                          animation: 'assets/lottie/japan.json'),
+                    ),
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: AuthenticationTitle(
@@ -55,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                       obsecured: true,
                     ),
                     const SizedBox(
-                      height: 60,
+                      height: 20,
                     ),
                     AuthenticationButton(
                       title: 'LOGIN',
@@ -71,7 +79,6 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.w300),
                       ),
                     ),
-                    const Spacer(),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 40),
                       child: RichText(
@@ -84,7 +91,12 @@ class _LoginPageState extends State<LoginPage> {
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.amber),
-                            recognizer: TapGestureRecognizer()..onTap = () {})
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const RegisterPage(),
+                                  )))
                       ])),
                     )
                   ],

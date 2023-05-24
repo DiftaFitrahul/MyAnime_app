@@ -5,6 +5,10 @@ import 'package:myanimeapp/Providers/Page/auth/verification_email_page.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
 import 'package:myanimeapp/components/inputs/authentication_input.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
+import 'package:provider/provider.dart';
+
+import '../../../components/animations/lottie_overlay.dart';
+import '../../Service/auth/provider/authenticator_provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -33,6 +37,16 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authenticator =
+        Provider.of<AuthenticatorProvider>(context, listen: false);
+    final loadingOverview = Provider.of<AuthenticatorProvider>(
+      context,
+    ).isLoading;
+    if (loadingOverview == true) {
+      Future.delayed(const Duration(milliseconds: 100)).then((value) {
+        LottieOverlay.instance().show(context: context);
+      });
+    }
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       body: Center(
@@ -138,11 +152,22 @@ class _RegisterPageState extends State<RegisterPage> {
                       if (!_key.currentState!.validate()) {
                         return;
                       }
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EmailVerificationPage(),
-                          ));
+                      authenticator
+                          .signUp(
+                              _emailController.text, _passwordController.text)
+                          .then((_) async {
+                        authenticator.verifyEmail();
+                        await Future.delayed(const Duration(seconds: 1))
+                            .then((value) {
+                          LottieOverlay.instance().hide(context: context);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const EmailVerificationPage(),
+                              ));
+                        });
+                      });
                     },
                   ),
                   Padding(

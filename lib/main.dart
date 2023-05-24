@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/Page/auth/login_page.dart';
+import 'package:myanimeapp/Providers/Service/auth/provider/authenticator_provider.dart';
 import 'package:myanimeapp/Providers/animes_search_provider.dart';
 import 'package:myanimeapp/Providers/bookmark_provider.dart';
 import 'package:myanimeapp/Providers/screens/anime_bookmark.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AnimesSearchProvider()),
         ChangeNotifierProvider(create: (context) => AnimesProvider()),
         ChangeNotifierProvider(create: (context) => BookMarkProvider()),
+        ChangeNotifierProvider(create: (context) => AuthenticatorProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

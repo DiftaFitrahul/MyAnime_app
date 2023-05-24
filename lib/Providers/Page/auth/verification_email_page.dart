@@ -5,6 +5,9 @@ import 'package:myanimeapp/Providers/Page/auth/register_page.dart';
 import 'package:myanimeapp/components/animations/lottie_animation.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
+import 'package:provider/provider.dart';
+
+import '../../Service/auth/provider/authenticator_provider.dart';
 
 class EmailVerificationPage extends StatelessWidget {
   const EmailVerificationPage({super.key});
@@ -50,7 +53,14 @@ class EmailVerificationPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 15, bottom: 35),
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Provider.of<AuthenticatorProvider>(context,
+                                listen: false)
+                            .verifyEmail();
+                        Provider.of<AuthenticatorProvider>(context,
+                                listen: false)
+                            .checkVerification();
+                      },
                       child: const Text('Resend email',
                           style: TextStyle(
                               decoration: TextDecoration.underline,

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../components/animations/lottie_overlay.dart';
 import '../../Service/auth/provider/authenticator_provider.dart';
+import '../../Service/auth/provider/coutdown_timer_provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -37,6 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final timer = Provider.of<TimerEmailVerification>(context, listen: false);
     final authenticator =
         Provider.of<AuthenticatorProvider>(context, listen: false);
     final loadingOverview = Provider.of<AuthenticatorProvider>(
@@ -160,6 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         await Future.delayed(const Duration(seconds: 1))
                             .then((value) {
                           LottieOverlay.instance().hide(context: context);
+                          timer.timerCount();
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

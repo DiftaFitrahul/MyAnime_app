@@ -2,23 +2,24 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-
-
 class TimerEmailVerification extends ChangeNotifier {
-  Timer? timer;
-  int start = 30;
+  int countdown = 60;
+  bool emailVerification = true;
 
-  Future<void> timerStart() async {
-    timer = Timer.periodic(await Future.delayed(const Duration(seconds: 1)),
-        (timer) {
-      if (start == 0) {
-        timer.cancel();
-      } else {
-        start--;
+  void timerCount() async {
+    for (int i = 0; i < 59; i++) {
+      print('==================');
+      print(countdown);
+      countdown--;
+      if (i == 0) emailVerification = true;
+      notifyListeners();
+      await Future.delayed(const Duration(seconds: 1));
+      if (countdown == 1) {
+        await Future.delayed(const Duration(milliseconds: 200));
+        emailVerification = false;
         notifyListeners();
+        countdown = 60;
       }
-    });
+    }
   }
-
-
 }

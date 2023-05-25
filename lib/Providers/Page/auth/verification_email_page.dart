@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:myanimeapp/Providers/Page/auth/register_page.dart';
+import 'package:myanimeapp/Providers/Service/auth/provider/coutdown_timer_provider.dart';
 import 'package:myanimeapp/components/animations/lottie_animation.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
@@ -16,6 +17,9 @@ class EmailVerificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final authenticator =
         Provider.of<AuthenticatorProvider>(context, listen: false);
+    final timer = Provider.of<TimerEmailVerification>(context);
+    final timerFunction =
+        Provider.of<TimerEmailVerification>(context, listen: false);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       body: SingleChildScrollView(
@@ -55,13 +59,19 @@ class EmailVerificationPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 15, bottom: 35),
                   child: TextButton(
-                      onPressed: () {
-                        authenticator.verifyEmail();
-                      },
-                      child: const Text('Resend email',
+                      onPressed: timer.emailVerification
+                          ? null
+                          : () {
+                              authenticator.verifyEmail();
+                              timerFunction.timerCount();
+                            },
+                      child: Text(
+                          'Resend email ${timer.emailVerification ? timer.countdown.toString() : ''}',
                           style: TextStyle(
                               decoration: TextDecoration.underline,
-                              color: Colors.amber))),
+                              color: timer.emailVerification
+                                  ? Colors.grey
+                                  : Colors.amber))),
                 )
               ],
             ),

@@ -14,6 +14,8 @@ class EmailVerificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authenticator =
+        Provider.of<AuthenticatorProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       body: SingleChildScrollView(
@@ -54,12 +56,7 @@ class EmailVerificationPage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 15, bottom: 35),
                   child: TextButton(
                       onPressed: () {
-                        Provider.of<AuthenticatorProvider>(context,
-                                listen: false)
-                            .verifyEmail();
-                        Provider.of<AuthenticatorProvider>(context,
-                                listen: false)
-                            .checkVerification();
+                        authenticator.verifyEmail();
                       },
                       child: const Text('Resend email',
                           style: TextStyle(

@@ -18,10 +18,30 @@ class Authenticator {
       if (e.code == 'weak-password') {
         rethrow;
       } else if (e.code == 'email-already-in-use') {
-        throw ('The account already exists for that email.');
+        if (FirebaseAuth.instance.currentUser?.emailVerified == false) {
+          throw ("The account already exists and didn't verified, please login and verify the account.");
+        } else {
+          throw ("The account already exists for that email");
+        }
       }
     }
   }
+
+  static Future<void> signIn(
+      {required String email, required String password}) async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw ('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        throw ('Wrong password provided for that user.');
+      }
+    }
+  }
+
+  
 
   static Future<void> emailVerification() async {
     try {

@@ -1,10 +1,18 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/Page/auth/register_page.dart';
+import 'package:myanimeapp/Providers/Page/auth/verification_email_page.dart';
+import 'package:myanimeapp/Providers/Page/home_page.dart';
+import 'package:myanimeapp/Providers/Service/auth/backend/authenticator.dart';
 import 'package:myanimeapp/components/animations/lottie_animation.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
 import 'package:myanimeapp/components/inputs/authentication_input.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
+import 'package:provider/provider.dart';
+
+import '../../../components/animations/lottie_overlay.dart';
+import '../../../components/error/authenticator_error.dart';
+import '../../Service/auth/provider/authenticator_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,6 +35,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isVerified = const Authenticator().emailVerified;
+    final authenticatorProvider =
+        Provider.of<AuthenticatorProvider>(context, listen: false);
+    final loadingOverview = Provider.of<AuthenticatorProvider>(
+      context,
+    ).isLoading;
+    if (loadingOverview == true) {
+      Future.delayed(const Duration(milliseconds: 100)).then((value) {
+        LottieOverlay.instance().show(context: context);
+      });
+    }
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 23, 56),
       body: Center(
@@ -82,6 +101,24 @@ class _LoginPageState extends State<LoginPage> {
                       if (!_key.currentState!.validate()) {
                         return;
                       }
+                      authenticatorProvider
+                          .signIn(
+                              _emailController.text, _passwordController.text)
+                          .then((_) async {
+                        await Future.delayed(const Duration(seconds: 1))
+                            .then((_) {
+                          LottieOverlay.instance().hide(context: context);
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => isVerified!
+                                ? const HomePage()
+                                : const EmailVerificationPage(),
+                          ));
+                        });
+                      }).catchError((error) {
+                        LottieOverlay.instance().hide(context: context);
+                        AuthenticatorMessage.message(
+                            context: context,title: 'Error', subtitle: error.toString(), color:Colors.red);
+                      });
                     },
                   ),
                   TextButton(

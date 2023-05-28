@@ -161,10 +161,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           .then((_) async {
                         authenticator.verifyEmail();
                         await Future.delayed(const Duration(seconds: 1))
-                            .then((value) {
+                            .then((_) {
                           LottieOverlay.instance().hide(context: context);
                           timer.timerCount();
-                          Navigator.pushReplacement(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
@@ -173,8 +173,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         });
                       }).catchError((error) {
                         LottieOverlay.instance().hide(context: context);
-                        AuthenticatorError.errorMessage(
-                            context, error.toString());
+                        AuthenticatorMessage.message(
+                            context: context,title: 'Error', subtitle: error.toString(), color: Colors.red);
                       });
                     },
                   ),

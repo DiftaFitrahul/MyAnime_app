@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:myanimeapp/Providers/Page/auth/register_page.dart';
+import 'package:myanimeapp/Providers/Page/home_page.dart';
 import 'package:myanimeapp/Providers/Service/auth/provider/coutdown_timer_provider.dart';
 import 'package:myanimeapp/components/animations/lottie_animation.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
+import 'package:myanimeapp/components/error/authenticator_error.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +17,7 @@ class EmailVerificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final authenticator =
         Provider.of<AuthenticatorProvider>(context, listen: false);
+    final emailVerified = Provider.of<AuthenticatorProvider>(context);
     final timer = Provider.of<TimerEmailVerification>(context);
     final timerFunction =
         Provider.of<TimerEmailVerification>(context, listen: false);
@@ -34,11 +35,7 @@ class EmailVerificationPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15, top: 40.0),
                     child: IconButton(
-                        onPressed: () => Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const RegisterPage(),
-                            )),
+                        onPressed: () => Navigator.pop(context),
                         icon: const Icon(Icons.arrow_back_ios_rounded,
                             color: Colors.white)),
                   ),
@@ -55,23 +52,64 @@ class EmailVerificationPage extends StatelessWidget {
                   child: LottieAnimation(animation: 'assets/lottie/email.json'),
                 ),
                 const Spacer(),
-                AuthenticationButton(title: 'Continue', callback: () {}),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 35),
-                  child: TextButton(
-                      onPressed: timer.emailVerification
-                          ? null
-                          : () {
-                              authenticator.verifyEmail();
-                              timerFunction.timerCount();
-                            },
-                      child: Text(
-                          'Resend email ${timer.emailVerification ? timer.countdown.toString() : ''}',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: timer.emailVerification
-                                  ? Colors.grey
-                                  : Colors.amber))),
+                AuthenticationButton(
+                    title: 'Continue',
+                    callback: emailVerified.isVerifiedAccount
+                        ? () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ));
+                          }
+                        : null),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15, bottom: 35),
+                      child: TextButton(
+                          onPressed: timer.emailVerification
+                              ? null
+                              : () {
+                                  authenticator.verifyEmail();
+                                  timerFunction.timerCount();
+                                },
+                          child: Text(
+                              'Resend email ${timer.emailVerification ? timer.countdown.toString() : ''}',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: timer.emailVerification
+                                      ? Colors.grey
+                                      : Colors.amber))),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15, bottom: 35),
+                      child: TextButton(
+                          onPressed: () async {
+                            authenticator.checkVerification();
+                            await Future.delayed(
+                                    const Duration(milliseconds: 450))
+                                .then((_) {
+                              emailVerified.isVerifiedAccount
+                                  ? AuthenticatorMessage.message(
+                                      context: context,
+                                      title: 'Succes',
+                                      subtitle: 'Email is verified ',
+                                      color: Colors.green)
+                                  : AuthenticatorMessage.message(
+                                      context: context,
+                                      title: 'Error',
+                                      subtitle: 'Email is not verified ',
+                                      color: Colors.red);
+                            });
+                          },
+                          child: const Text('Check verify',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.amber))),
+                    )
+                  ],
                 )
               ],
             ),

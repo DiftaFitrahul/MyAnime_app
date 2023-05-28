@@ -18,7 +18,7 @@ class Authenticator {
       if (e.code == 'weak-password') {
         rethrow;
       } else if (e.code == 'email-already-in-use') {
-        rethrow;
+        throw ('The account already exists for that email.');
       }
     }
   }

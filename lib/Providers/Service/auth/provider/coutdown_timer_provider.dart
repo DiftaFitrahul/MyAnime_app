@@ -8,8 +8,6 @@ class TimerEmailVerification extends ChangeNotifier {
 
   void timerCount() async {
     for (int i = 0; i < 59; i++) {
-      print('==================');
-      print(countdown);
       countdown--;
       if (i == 0) emailVerification = true;
       notifyListeners();

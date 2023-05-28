@@ -5,11 +5,18 @@ class AuthenticatorProvider extends ChangeNotifier {
   bool? isLoading;
 
   Future<void> signUp(String email, String password) async {
-    isLoading = true;
-    notifyListeners();
-    await Authenticator.signUp(email: email, password: password);
-    isLoading = false;
-    notifyListeners();
+    try{
+      isLoading = true;
+      notifyListeners();
+      await Authenticator.signUp(email: email, password: password);
+      isLoading = false;
+      notifyListeners();
+    } catch(e) {
+      isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+    
   }
 
   void verifyEmail() async {

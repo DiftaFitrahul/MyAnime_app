@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/Page/auth/login_page.dart';
 import 'package:myanimeapp/Providers/Page/auth/verification_email_page.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
+import 'package:myanimeapp/components/error/authenticator_error.dart';
 import 'package:myanimeapp/components/inputs/authentication_input.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
 import 'package:provider/provider.dart';
@@ -170,6 +171,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                     const EmailVerificationPage(),
                               ));
                         });
+                      }).catchError((error) {
+                        LottieOverlay.instance().hide(context: context);
+                        AuthenticatorError.errorMessage(
+                            context, error.toString());
                       });
                     },
                   ),

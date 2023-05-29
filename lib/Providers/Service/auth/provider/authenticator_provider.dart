@@ -48,4 +48,13 @@ class AuthenticatorProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<String> resetPassword({required String email}) async {
+    try {
+      await Authenticator.resetPassword(email: email);
+      return 'Succes send email';
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

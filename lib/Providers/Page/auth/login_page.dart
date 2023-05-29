@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/Page/auth/register_page.dart';
+import 'package:myanimeapp/Providers/Page/auth/reset_password.dart';
 import 'package:myanimeapp/Providers/Page/auth/verification_email_page.dart';
 import 'package:myanimeapp/Providers/Page/home_page.dart';
 import 'package:myanimeapp/Providers/Service/auth/backend/authenticator.dart';
@@ -11,7 +12,7 @@ import 'package:myanimeapp/components/views/authentication_title.dart';
 import 'package:provider/provider.dart';
 
 import '../../../components/animations/lottie_overlay.dart';
-import '../../../components/error/authenticator_error.dart';
+import '../../../components/message/authenticator_message.dart';
 import '../../Service/auth/provider/authenticator_provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -72,7 +73,9 @@ class _LoginPageState extends State<LoginPage> {
                     inputIcon: Icons.email_outlined,
                     hintText: 'EMAIL',
                     validatorInput: (value) {
-                      if (value!.contains('@')) {
+                      if (value!.contains('@gmail') ||
+                          value.contains('@mail') ||
+                          value.contains('@yahoo')) {
                         return null;
                       } else {
                         return 'invalid email';
@@ -85,8 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: 'PASSWORD',
                     obsecured: true,
                     validatorInput: (value) {
-                      if (value!.length < 8) {
-                        return 'password at least 8 characters';
+                      if (value!.length < 7) {
+                        return 'password at least 6 characters';
                       } else {
                         return null;
                       }
@@ -117,12 +120,19 @@ class _LoginPageState extends State<LoginPage> {
                       }).catchError((error) {
                         LottieOverlay.instance().hide(context: context);
                         AuthenticatorMessage.message(
-                            context: context,title: 'Error', subtitle: error.toString(), color:Colors.red);
+                            context: context,
+                            title: 'Error',
+                            subtitle: error.toString(),
+                            color: Colors.red);
                       });
                     },
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ResetPasswordPage(),
+                        )),
                     child: Text(
                       'Forgot Password?',
                       style: TextStyle(

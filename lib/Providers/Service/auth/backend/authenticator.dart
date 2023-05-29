@@ -41,8 +41,6 @@ class Authenticator {
     }
   }
 
-  
-
   static Future<void> emailVerification() async {
     try {
       await FirebaseAuth.instance.currentUser?.sendEmailVerification();
@@ -56,6 +54,18 @@ class Authenticator {
       await FirebaseAuth.instance.currentUser?.reload();
     } catch (e) {
       rethrow;
+    }
+  }
+
+  static Future<void> resetPassword({required String email}) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw 'User not found for that email.';
+      } else {
+        rethrow;
+      }
     }
   }
 }

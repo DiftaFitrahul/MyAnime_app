@@ -6,14 +6,15 @@ class AuthenticationInput extends StatefulWidget {
   final String hintText;
   final bool obsecured;
   final String? Function(String?)? validatorInput;
-  const AuthenticationInput({
-    super.key,
-    required this.inputController,
-    required this.inputIcon,
-    required this.hintText,
-    required this.validatorInput,
-    this.obsecured = false,
-  });
+  final BoxBorder? inputBorder;
+  const AuthenticationInput(
+      {super.key,
+      required this.inputController,
+      required this.inputIcon,
+      required this.hintText,
+      required this.validatorInput,
+      this.obsecured = false,
+      this.inputBorder});
 
   @override
   State<AuthenticationInput> createState() => _AuthenticationInputState();
@@ -54,7 +55,9 @@ class _AuthenticationInputState extends State<AuthenticationInput> {
           bottom: 10,
         ),
         decoration: BoxDecoration(
-            color: _colorContainer, borderRadius: BorderRadius.circular(20)),
+            color: _colorContainer,
+            borderRadius: BorderRadius.circular(20),
+            border: widget.inputBorder),
         child: TextFormField(
           focusNode: _focusnode,
           controller: widget.inputController,

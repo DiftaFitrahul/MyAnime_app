@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myanimeapp/Providers/Page/auth/login_page.dart';
 import 'package:myanimeapp/Providers/Page/auth/verification_email_page.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
-import 'package:myanimeapp/components/error/authenticator_error.dart';
+import 'package:myanimeapp/components/message/authenticator_message.dart';
 import 'package:myanimeapp/components/inputs/authentication_input.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
 import 'package:provider/provider.dart';
@@ -111,8 +111,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     inputController: _emailController,
                     inputIcon: Icons.email_outlined,
                     hintText: 'EMAIL',
-                    validatorInput: (value) {
-                      if (value!.contains('@')) {
+                    validatorInput: (input) {
+                      if (input!.contains('@gmail') ||
+                          input.contains('@mail') ||
+                          input.contains('@yahoo')) {
                         return null;
                       } else {
                         return 'email invalid';
@@ -125,8 +127,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     hintText: 'PASSWORD',
                     obsecured: true,
                     validatorInput: (value) {
-                      if (value!.length < 8) {
-                        return 'password at least 8 characters';
+                      if (value!.length < 7) {
+                        return 'password at least 6 characters';
                       } else {
                         return null;
                       }
@@ -174,7 +176,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       }).catchError((error) {
                         LottieOverlay.instance().hide(context: context);
                         AuthenticatorMessage.message(
-                            context: context,title: 'Error', subtitle: error.toString(), color: Colors.red);
+                            context: context,
+                            title: 'Error',
+                            subtitle: error.toString(),
+                            color: Colors.red);
                       });
                     },
                   ),

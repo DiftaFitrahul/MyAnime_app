@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myanimeapp/Providers/Page/auth/register_page.dart';
 import 'package:myanimeapp/Providers/Page/home_page.dart';
 import 'package:myanimeapp/Providers/Service/auth/provider/coutdown_timer_provider.dart';
 import 'package:myanimeapp/components/animations/lottie_animation.dart';
 import 'package:myanimeapp/components/button/authentication_button.dart';
-import 'package:myanimeapp/components/error/authenticator_error.dart';
+import 'package:myanimeapp/components/message/authenticator_message.dart';
 import 'package:myanimeapp/components/views/authentication_title.dart';
 import 'package:provider/provider.dart';
 

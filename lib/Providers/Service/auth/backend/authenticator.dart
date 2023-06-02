@@ -6,7 +6,7 @@ class Authenticator {
   bool get isLogin => userId != null;
   String? get username => FirebaseAuth.instance.currentUser?.displayName;
   String? get email => FirebaseAuth.instance.currentUser?.email;
-  String? get password => FirebaseAuth.instance.currentUser?.photoURL;
+  String? get photoUrl => FirebaseAuth.instance.currentUser?.photoURL;
   bool? get emailVerified => FirebaseAuth.instance.currentUser?.emailVerified;
 
   static Future<void> signUp(
@@ -68,4 +68,6 @@ class Authenticator {
       }
     }
   }
+
+
 }

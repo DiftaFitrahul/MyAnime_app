@@ -12,11 +12,14 @@ class UserInfoStorage {
     required String image,
   }) async {
     try {
+      // first check if the user is already registered
       final infoUser = await FirebaseFirestore.instance
           .collection('users')
           .where('userId', isEqualTo: userId)
           .limit(1)
           .get();
+
+      //check is user is not empty
       if (infoUser.docs.isNotEmpty) {
         await infoUser.docs.first.reference.update({
           'userName': userName,

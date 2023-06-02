@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable;
+import 'package:myanimeapp/Providers/Service/auth/user_info/user_info_payload.dart';
 
 @immutable
 class UserInfoStorage {
   const UserInfoStorage();
-  Future<void> saveUserInfo({
+  Future<bool> saveUserInfo({
     required String userId,
     required String userName,
     required String email,
@@ -18,11 +19,19 @@ class UserInfoStorage {
           .get();
       if (infoUser.docs.isNotEmpty) {
         await infoUser.docs.first.reference.update({
-          'userName' : userName,
-          'email' : email,
-          'image' : image,
+          'userName': userName,
+          'email': email,
+          'image': image,
         });
+        return true;
       }
-    } catch (e) {}
+
+      final payload = UserInfoPayload(
+          userId: userId, userName: userName, email: email, image: image);
+      await FirebaseFirestore.instance.collection('users').add(payload);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

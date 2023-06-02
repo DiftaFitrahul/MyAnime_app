@@ -17,10 +17,6 @@ class AuthenticatorProvider extends ChangeNotifier {
       final userId = _authenticator.userId;
       if (userId != null && _authenticator.emailVerified == true) {
         await saveUserInfo(userId: userId);
-      } else {
-        print('======================');
-        print('gagal');
-        print('=======================');
       }
       isLoading = false;
       notifyListeners();
@@ -36,6 +32,10 @@ class AuthenticatorProvider extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       await Authenticator.signIn(email: email, password: password);
+      final userId = _authenticator.userId;
+      if (userId != null && _authenticator.emailVerified == true) {
+        await saveUserInfo(userId: userId);
+      }
       isLoading = false;
       notifyListeners();
     } catch (e) {
@@ -53,14 +53,6 @@ class AuthenticatorProvider extends ChangeNotifier {
     await Authenticator.checkEmailVerification();
 
     if (const Authenticator().emailVerified == true) {
-      final userId = _authenticator.userId;
-      if (userId != null) {
-        await saveUserInfo(userId: userId);
-      } else {
-        print('======================');
-        print('gagal');
-        print('=======================');
-      }
       isVerifiedAccount = true;
       notifyListeners();
     } else {
@@ -79,7 +71,7 @@ class AuthenticatorProvider extends ChangeNotifier {
   }
 
   Future<void> saveUserInfo({required String userId}) async {
-    _userInfoStorage.saveUserInfo(
+    await _userInfoStorage.saveUserInfo(
         userId: userId,
         userName: _authenticator.username ?? '',
         email: _authenticator.email ?? '',

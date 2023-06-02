@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myanimeapp/Providers/Page/auth/login_page.dart';
 import 'package:myanimeapp/components/button/setting_button.dart';
 
 class AccountPage extends StatelessWidget {
@@ -92,7 +93,15 @@ class AccountPage extends StatelessWidget {
                   leadingIcon: Icons.send_and_archive_rounded,
                   text: 'Invite a Frind'),
               SettingButton(
-                  function: () {}, leadingIcon: Icons.logout, text: 'Logout'),
+                  function: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ));
+                  },
+                  leadingIcon: Icons.logout,
+                  text: 'Logout'),
             ],
           ),
         ),
